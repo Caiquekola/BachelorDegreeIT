@@ -17,7 +17,7 @@ public class PedrinhoNatal {
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner scan = new Scanner(System.in);
-        int mes=0,dia=0,diaNatal=359,diaAteNatal=0;
+        int mes=0,dia=0,diaNatal=360,diaAteNatal=0;
         while(mes!=12|dia!=25){
             mes = scan.nextInt();
             dia = scan.nextInt();
