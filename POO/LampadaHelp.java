@@ -8,13 +8,31 @@ package programacaoorientadao;
  *
  * @author 0056837
  */
+import java.util.Scanner;
 public class LampadaHelp {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Scanner scan = new Scanner(System.in);
+        String letras = scan.next();
+        char letrasSeparadas[] = new char[26];
+        for (int i = 0; i < 26; i++) {
+            letrasSeparadas[i] = letras.charAt(i);
+        }
+        int quantNum = scan.nextInt();
+        int numAlfabeto[] = new int[quantNum];
+        for (int i = 0; i < quantNum; i++) {
+            numAlfabeto[i] = scan.nextInt();
+            numAlfabeto[i]--;
+        }
+        for (int i = 0; i < quantNum; i++) {
+            System.out.print(letrasSeparadas[numAlfabeto[i]]);
+        }
+        
+        
+        
     }
     
 }
