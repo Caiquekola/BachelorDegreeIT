@@ -13,11 +13,18 @@ git config --global init.defaultBranch main //Setar main como o nome do repesito
 mkdir (cria pasta)
 o comando "cd" localiza-se para a pasta
 o comando "ls" lista todo o conteúdo da pasta
+rm -rf NOMEARQUIVO //Remove a força o arquivo
 
+touch README.md //Cria um arquivo vazio
 git remote add origin "link do github projeto" //Adicionar a pasta no github
 git clone URL novo-nome-do-clone
 git push -u origin main //Envia os arquivos
 git status
 git add FILE
+git commit -m"cometarios"
+git restole <file> //Para discartar mudanças no diretório
 cat config //Serve para ver a configuração do git
+git commit --amend "aqui eu atualizo o comentário do ultimo committ"
+desfazer commit
+git 
 
