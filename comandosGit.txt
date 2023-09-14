@@ -11,8 +11,8 @@ git config --global init.defaultBranch main //Setar main como o nome do repesito
 
 
 mkdir (cria pasta)
-o comando "cd" localiza-se para a pasta
-o comando "ls" lista todo o conteúdo da pasta
+"cd" localiza-se para a pasta
+"ls" lista todo o conteúdo da pasta
 rm -rf NOMEARQUIVO //Remove a força o arquivo
 
 touch README.md //Cria um arquivo vazio
