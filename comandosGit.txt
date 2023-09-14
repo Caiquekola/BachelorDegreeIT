@@ -27,3 +27,7 @@ cat config //Serve para ver a configuração do git
 git commit --amend -m"aqui eu atualizo o comentário do ultimo committ"
 caso git commit --amend {ele entra em um console, aperte "I" para editar o texto, para sair aperte ESQ e digite :wq}
 git log {Serve para mostrar o detalhe do commit}
+git reflog 
+git reset --mixed numeros do commit
+git reset --hard
+git restore --staged nomedoarquivo
