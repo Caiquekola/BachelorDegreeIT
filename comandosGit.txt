@@ -24,7 +24,8 @@ git add FILE
 git commit -m"cometarios"
 git restole <file> //Para discartar mudanças no diretório
 cat config //Serve para ver a configuração do git
-git commit --amend "aqui eu atualizo o comentário do ultimo committ"
+git commit --amend -m"aqui eu atualizo o comentário do ultimo committ"
+caso git commit --amend {ele entra em um console, aperte "I" para editar o texto, para sair aperte ESQ e digite :wq}
 desfazer commit
 git 
 
