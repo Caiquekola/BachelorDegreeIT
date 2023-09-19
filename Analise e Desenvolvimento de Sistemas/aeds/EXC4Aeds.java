@@ -7,30 +7,31 @@ package aeds;
 
 
 public class EXC4Aeds {
-    private static void ParEImpar(int Min, int Max){
-        int Fim = Min;
-        if(Fim>Max){
-            return;
-        }else{
-            if(Min%2==0){
-                System.out.println("Numeros pares: "+Min);
-            }else{
-                System.out.println("Numeros impares "+Min);
-            }
-            ParEImpar(Min+1,Max);
+    private static void Par(int Min, int Max){
+        if(Min>Max) {return;}   
+        if(Min%2==0){
+            System.out.print(Min+" ");
         }
+        Par(Min+1,Max);   
     }
-    
+    private static void Impar(int Min, int Max){
+        if(Min>Max) {return;}   
+        if(Min%2!=0){
+            System.out.print(Min+" ");
+        }
+        Impar(Min+1,Max); 
+    }
+    private static void ParEImpar(int Min, int Max){
+        System.out.print("Numeros pares: ");
+        Par(Min,Max);
+        System.out.print("\nNumeros impares: ");
+        Impar(Min,Max);
+    }
     public static void main(String[] args) {
-//          Escreva uma função recursiva que recebe dois números 
-//          min e max que definem o intervalo. Imprima todos os número 
-//          pares e ímpares da seguinte forma, por exemplo:
-//              min = 1 e max = 6
-//              Números pares: 2 4 6
-//              Números ímpares: 1 3 5  
-            int min = 15;
-           int max = 20;
-           ParEImpar(min,max);
+           int min = 1;
+           int max = 6;
+  
+           ParEImpar(min,max);  
     }
            
 }
