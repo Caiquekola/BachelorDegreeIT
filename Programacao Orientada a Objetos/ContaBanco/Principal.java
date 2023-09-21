@@ -78,6 +78,7 @@ public class Principal {
                     break;
             }
             System.out.println("");
+            scan.close();
         }
 //        Conta conta1 = new Conta();
 //        Cliente cli1 = new Cliente();
