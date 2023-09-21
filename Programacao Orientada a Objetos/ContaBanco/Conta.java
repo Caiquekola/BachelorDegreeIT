@@ -20,13 +20,14 @@ public class Conta {
         if(Valor<this.saldo){
             this.saldo -= Valor;
             destino.saldo += Valor;
+            System.out.println("O R$"+Valor+" foi transferido de "+this.titular.getNome()+" para "+destino.titular.getNome());
         }else{
             System.out.println("Saldo insuficiente para transferencia");
         }
         
     }
     public void consultarSaldo(){
-        System.out.println(String.format("Seu saldo = R$%,.2f",this.saldo));
+        System.out.println(String.format("Saldo da conta %d = R$%,.2f",this.numero,this.saldo));
     }
     public void conta(){
         System.out.println("Conta: "+this.numero);
@@ -38,15 +39,24 @@ public class Conta {
     }
     
     public void sacar(float valor){
-        if(valor <= this.saldo){
+        if(valor <= this.saldo&valor>0){
             this.saldo = this.saldo - valor;
-            System.out.println(String.format("Saque de R$%,.2f efetuado!",valor));
+            System.out.println(String.format("\nSaque de R$%,.2f efetuado!",valor));
+            System.out.printf("Saldo atual R$%,.2f",this.getSaldo());
         }else{
             System.out.println("Saldo insuficiente para saque!");
         }
     }
     public void depositar(double valor){
-        this.saldo += valor;
+        
+        if(valor<0){
+            this.saldo += 0;
+            System.out.println("Impossivel depositar");
+        }else{
+            
+            this.saldo += valor;
+            System.out.printf("Saldo atual R$%,.2f\n",this.getSaldo());
+        }
     }
     
     public void setNumero(int Numero){
