@@ -1,29 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-
-package aeds;
-
-
 public class EXC3Aeds {
-    private static boolean primo(int Numero){
-        if(Numero<=1) return false;
-        for (int i = 2; i < Numero; i++) {
-            if(Numero%i==0){
-                return false;
-            }
+    private static boolean primo(int N, int Cont,boolean logico){
+        if(Cont>=N){return logico;}
+        else{
+            if(N%Cont==0){
+            logico=false;
         }
-        return true;
+        return primo(N,Cont+1,logico);}
     }
-    
     public static void main(String[] args) {
-        //Escreva uma função recursiva que recebe um número e 
-        //verifica se este é um primo ou não. 
+        //Objetivo criar uma função recursiva que 
+        //Verifica se o número é primo ou não
         int numero = 7;
-        System.out.println(primo(numero));
-        
-        
+        int contador = 2;
+        boolean primim = true;
+        System.out.println(primo(numero,contador,primim));
     }
 
 }
