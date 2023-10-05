@@ -21,8 +21,11 @@ class Ponto2D{
         this.eixoX = x;
         this.eixoY = y;
     }
-    //aiii?
-    
+    //aiii
+    public Ponto2D(Ponto2D pontos){
+         this.eixoX = pontos.getEixoX();
+         this.eixoY = pontos.getEixoY();
+    }
     //b
     public void setEixoX(double x){
         this.eixoX = x;
