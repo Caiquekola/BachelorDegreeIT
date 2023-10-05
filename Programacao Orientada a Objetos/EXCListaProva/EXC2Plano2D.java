@@ -45,6 +45,14 @@ class Ponto2D{
         this.eixoX = x;
         this.eixoY = y;
     }
+    public void mudarPonto(){
+        this.eixoX += 2.5;
+        this.eixoY += 1.0;
+    }
+    public void mudarPonto(Ponto2D ponto){
+        this.eixoX = ponto.getEixoX();
+        this.eixoY = ponto.getEixoY();
+    }
     //d
     public boolean equals(Ponto2D p2){
         if(this.getEixoX()==p2.getEixoX()&this.getEixoY()==p2.getEixoY()){
