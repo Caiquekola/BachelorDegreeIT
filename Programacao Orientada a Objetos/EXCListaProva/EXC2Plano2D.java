@@ -79,7 +79,13 @@ class Ponto2D{
  
         return solucao;
     }
-    //g?
+    //g
+    public Ponto2D clone(){
+        Ponto2D obj = new Ponto2D();
+        obj.setX(this.getX());
+        obj.setY(this.getY());
+        return obj;
+    }
 }
 
 public class EXC2Plano2D {
