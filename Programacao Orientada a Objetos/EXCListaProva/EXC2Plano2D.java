@@ -82,8 +82,8 @@ class Ponto2D{
     //g
     public Ponto2D clone(){
         Ponto2D obj = new Ponto2D();
-        obj.setX(this.getX());
-        obj.setY(this.getY());
+        obj.setEixoX(this.getEixoX());
+        obj.setEixoY(this.getEixoY());
         return obj;
     }
 }
@@ -100,6 +100,9 @@ public class EXC2Plano2D {
         System.out.println(primeiro.toString());
         System.out.println(primeiro.distanciaObjetos(segundo));
         System.out.println(primeiro.distancia(2, 3));
+        Ponto2D terceiro = primeiro.clone();
+        System.out.println(terceiro.toString());
+        
     }
 
 }
