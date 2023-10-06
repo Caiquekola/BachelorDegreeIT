@@ -53,7 +53,10 @@ class Country{
         
     //D adicionar pais a fronteira
     public void adcFronteira(Country pais){
-        fronteiras.add(pais);
+        if(fronteiras.size()<40)
+        {
+            fronteiras.add(pais);
+        }
     }
    //D limitrofe
     public boolean limitofe(Country pais){
