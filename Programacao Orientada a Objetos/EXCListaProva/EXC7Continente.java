@@ -41,11 +41,57 @@ class Continente{
         return densidade;
     }
     //F
-    public String maiorPais(){
-        String maior;
+    public Country maiorPop(){
+        int index=0;
+        int maiorPop=0;
         for (int i = 0; i < paises.size() ; i++) {
-            
+            if(this.paises.get(i).getPopulacao()>maiorPop){
+                maiorPop = this.paises.get(i).getPopulacao();
+                index = i;
+            }
         }
+        return this.paises.get(index);
+    }
+    //G
+    public Country menorPop(){
+        int menorPop=2000000;
+        int index=0;
+        for (int i = 0; i < paises.size(); i++) {
+            if(this.paises.get(i).getPopulacao()<menorPop){
+                menorPop=this.paises.get(i).getPopulacao();
+                index = i;
+            }
+        }
+        return this.paises.get(index);
+    }
+    //H
+    public Country maiorDimensao(){
+        int index=0;
+        double maiorDimensao=0;
+        for (int i = 0; i < paises.size(); i++) {
+            if(this.paises.get(i).getArea()>maiorDimensao){
+                index=i;
+                maiorDimensao = this.paises.get(i).getArea();
+            }
+        }
+        return this.paises.get(index);
+    }
+    //I
+    public Country menorDimensao(){
+        int index=0;
+        double maiorDimensao=999999999;
+        for (int i = 0; i < paises.size(); i++) {
+            if(this.paises.get(i).getArea()>maiorDimensao){
+                index=i;
+                maiorDimensao = this.paises.get(i).getArea();
+            }
+        }
+        return this.paises.get(index);
+    }
+    //J
+    public double razaoMaiorMenor(){
+        double razao = this.maiorDimensao().getArea()/this.menorDimensao().getArea();
+        return razao;
     }
 }
 class Country{
@@ -141,9 +187,16 @@ public class EXC7Continente {
     
     public static void main(String[] args) {
         Continente c1 = new Continente("South America");
-        Country p1 = new Country("3232-4","Brasil",8000000);
+        Country p1 = new Country("3232-4","Brasil",7000000); 
+        Country p2 = new Country("3232-4","Italia",8000000);
+        p1.setPopulacao(200000000);
+        p2.setPopulacao(100);
         c1.paises.add(p1);
-        System.out.println(c1.dimensao()+" km2");
+        c1.paises.add(p2);
+        System.out.println(c1.dimensao()/1000+" mil km2");
+        System.out.println(c1.maiorPop().getNome());
+        System.out.println(c1.menorPop().getNome());
+        System.out.println(String.format("%.2f",c1.razaoMaiorMenor()));
     }
 
 }
