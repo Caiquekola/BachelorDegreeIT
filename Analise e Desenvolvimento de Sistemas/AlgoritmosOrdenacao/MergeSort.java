@@ -50,7 +50,7 @@ public class MergeSort {
     }
     }
     static Random random = new Random();
-    static int numSize = 500000;
+    static int numSize = 5000000;
     static int nDisorderly[] = new int[numSize];
 
     public static void main(String[] args) {
@@ -61,12 +61,12 @@ public class MergeSort {
         }
         System.out.println("");
         double startTime = System.currentTimeMillis();
-        mergeSort(numSize-1,nDisorderly);
+        mergeSort(numSize,nDisorderly);
         double finalTime = (System.currentTimeMillis()-startTime)/1000;
         for(int x: nDisorderly){
             System.out.print(x+" ");
         }
-        System.out.printf("\nFinal time: %.3f seconds",finalTime);
+        System.out.printf("\nFinal time: %.3f seconds\n",finalTime);
     }
     
 }
