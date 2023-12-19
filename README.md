@@ -1,2 +1,2 @@
-#                                         <p align="center">Linguagem Java ☕</p>
-<p align="center">Esse repositório foi criado para demonstrar o meu avanço na linguagem JAVA, na disciplina de introdução de Sistemas de Informação, Programação Orientada a Objetos, Algoritmos e Estrutura de Dados e Sistemas Digitais e Circuitos Combinacionais , no curso de Sistemas de Informação do IFMG. 👨‍💻</p>
+#                                         <p align="center">Information System ☕</p>
+<p align="center">This repository was created to demonstrate my progress in my Bachelor's degree in Information Systems. Some subjects such as: introduction to Information Systems, Object Oriented Programming, Algorithms and Data Structure and Digital Systems and Combinational Circuits 👨‍💻</p>
