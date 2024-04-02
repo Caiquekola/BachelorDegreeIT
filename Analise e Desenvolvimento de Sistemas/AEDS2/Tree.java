@@ -7,14 +7,21 @@ package aeds;
  */
 public class Tree<E> {
     
+    private Node root;
+    
     public Tree(E key){
-        this.root = new Node(key,null,null);
+        createRoot(key);
     }
     public Tree(){
         root = new Node(null,null,null);
     }
     
-    private Node root;
+    public void createRoot(E root){
+        this.root = new Node(root, null,null);
+    }
+    
+    
+    
     
     
 }
