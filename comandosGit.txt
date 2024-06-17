@@ -10,7 +10,9 @@ git restore
 
 git config --global init.defaultBranch main //Setar main como o nome do repesitorio principal como main
 
-
+git branch nome
+git checkout nome (para entrar na branch)
+git merge nome (misturo ambas branchs
 
 mkdir (cria pasta)
 "cd" localiza-se para a pasta
