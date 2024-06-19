@@ -9,10 +9,8 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         double V = scan.nextDouble();
         double D = scan.nextDouble();
-        //VM = D/T
-        //
         V = V / D;   // Calcula a razão V/D
-        V += 19.01;   // Adiciona 19.0 horas
+        V += 19.0;   // Adiciona 19.0 horas
         V = V % 24.0; // Obtém a hora do dia em um formato de 24 horas
         int hh = (int) V; // Parte inteira é a hora
         int mm = (int) ((V - hh) * 60.0); // Parte decimal convertida em minutos

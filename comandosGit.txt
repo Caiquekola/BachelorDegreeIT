@@ -4,11 +4,15 @@ git config --global user.name "caiquekola" //Setar o nome de usúario globalment
 git config --global user.email caiquekola@hotmail.com//Setar o email globalmente no pc 
 
 Ctrl + L (Limpa a tela)
-
+git diff (ver as edições dos arquivos)
+git log ver os ultimos commit
+git restore
 
 git config --global init.defaultBranch main //Setar main como o nome do repesitorio principal como main
 
-
+git branch nome
+git checkout nome (para entrar na branch)
+git merge nome (misturo ambas branchs
 
 mkdir (cria pasta)
 "cd" localiza-se para a pasta
