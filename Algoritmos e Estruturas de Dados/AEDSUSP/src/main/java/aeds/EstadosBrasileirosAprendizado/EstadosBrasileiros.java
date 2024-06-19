@@ -2,8 +2,8 @@ package aeds.EstadosBrasileirosAprendizado;
 
 public enum EstadosBrasileiros{
     SAO_PAULO("SP","São Paulo"),
-    MINAS_GERAIS("MG","Minas Gerais");
-
+    MINAS_GERAIS("MG","Minas Gerais"),
+    Teste_GITHUB("GT","GIt");
 
     private String sigla;
     private String nome;
