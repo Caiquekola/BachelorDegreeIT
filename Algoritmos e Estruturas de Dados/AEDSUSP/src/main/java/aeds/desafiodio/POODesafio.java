@@ -4,7 +4,7 @@ import org.w3c.dom.ls.LSOutput;
 
 public class POODesafio {
     public static void main(String[] args) {
-        ReprodutorMusical ipod =
+        ReprodutorMusical ipod = new Iphone();
 
     }
 }
