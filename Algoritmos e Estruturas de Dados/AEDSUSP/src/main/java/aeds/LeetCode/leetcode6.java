@@ -18,7 +18,7 @@ class Solution {
             int pos = s.lastIndexOf(s.charAt(i));
             if(pos!=-1&pos!=i){
                 for(j=i+1;j<pos;j++){
-
+                    //Finalizando
                 }
 
             }
