@@ -1,9 +1,10 @@
 package aeds.dio;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Item {
+public class Item implements Comparable<Item>  {
     private String nome;
     private double preco;
     private int quantidade;
@@ -34,6 +35,11 @@ public class Item {
                 ", quantidade=" + quantidade +
                 '}';
     }
+
+    @Override
+    public int compareTo(Item i) {
+        return this.nome.compareTo(i.nome);
+    }
 }
 
 class CarrinhoDeCompras{
@@ -58,7 +64,10 @@ class CarrinhoDeCompras{
         }
         itemList.removeAll(removeList);
     }
-
+    public List<Item> ordenar(){
+        Collections.sort(itemList);
+        return itemList;
+    }
     public double calcularValorTotal(){
         double precoTotal = 0;
         for(Item item: itemList){
@@ -77,6 +86,9 @@ class Teste{
         CarrinhoDeCompras carrinhoDeCompras = new CarrinhoDeCompras();
         carrinhoDeCompras.adicionarItem("banana",2.6,4);
         carrinhoDeCompras.adicionarItem("abacate",4.5,4);
+        carrinhoDeCompras.adicionarItem("azulejo",4.5,4);
+        carrinhoDeCompras.exibirItens();
+        carrinhoDeCompras.ordenar();
         carrinhoDeCompras.exibirItens();
         System.out.println("VALOR TOTAL: R$"+carrinhoDeCompras.calcularValorTotal());
         carrinhoDeCompras.removerItem("banana");
