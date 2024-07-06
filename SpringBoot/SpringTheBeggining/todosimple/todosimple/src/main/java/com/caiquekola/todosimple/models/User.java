@@ -6,11 +6,13 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
-@Table(name =User.TABLE_NAME)
+@Table(name = User.TABLE_NAME)
 public class User {
     public static final String TABLE_NAME = "user";
     public interface CreateUser{}
@@ -41,9 +43,25 @@ public class User {
     @Size(groups = CreateUser.class,min = 5, max = 50)
     private String password;
 
-    //private List<Task> tasks = new ArrayList<Task>();
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks = new ArrayList<>();
 
     public User() {
+    }
+
+    public User(Long id, String username, String password, List<Task> tasks) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.tasks = tasks;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public User(Long id, String username, String password) {
