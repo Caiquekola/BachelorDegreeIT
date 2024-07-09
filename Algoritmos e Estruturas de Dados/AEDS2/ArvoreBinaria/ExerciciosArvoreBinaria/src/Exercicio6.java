@@ -21,6 +21,7 @@ public class Exercicio6 {
         arvoreBinaria.inserir(item8);
         arvoreBinaria.inserir(item9);
         arvoreBinaria.inserir(item7);
+        System.out.println("\n\nPós Ordem");
         arvoreBinaria.exibirPosOrdem(arvoreBinaria.getRaiz());
     }
 }

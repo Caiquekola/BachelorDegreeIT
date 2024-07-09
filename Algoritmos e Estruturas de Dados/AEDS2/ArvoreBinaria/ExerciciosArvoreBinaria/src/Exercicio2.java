@@ -20,6 +20,8 @@ public class Exercicio2 {
         arvoreBinaria.inserir(item8);
         arvoreBinaria.inserir(item9);
         arvoreBinaria.inserir(item7);
+
+        System.out.println("\n\n Ordem Simétrica");
         arvoreBinaria.exibirOrdemSimetrica(arvoreBinaria.getRaiz());
     }
 }

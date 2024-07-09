@@ -12,5 +12,13 @@ public class Exercicio7 {
         ABB.inserir(new Item(51));
         ABB.inserir(new Item(99));
         ABB.inserir(new Item(213));
+        System.out.println("\n\n\n");
+        ABB.exibirPreOrdem(ABB.getRaiz());
+        System.out.println("\nSUCESSOR");
+        //Senão tiver elementos lançar um RunTimeExcepption
+        int elemento = 16;
+        System.out.println(ABB.sucessor(elemento));
+
+
     }
 }
