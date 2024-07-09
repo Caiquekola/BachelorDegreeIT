@@ -1,0 +1,4 @@
+Baseado no meu aprendizado em AEDS acredito que a principal característica de uma Árvore Binária de Busca seja a
+inserção de elemento já ordenado na árvore e o mais importante é que ela também como próprio nome diz ela apresenta
+uma busca binária que é uma busca bastante eficiente de elementos. Podendo ser O(1) no melhor caso e O(log N).
+Algo a se considerar é que não recomenda-se conter elementos duplicados e ela pode se tornar uma árvore não equilibrada.
