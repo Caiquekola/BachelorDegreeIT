@@ -21,7 +21,7 @@ public class TaskService {
     private UserService userService;
 
     public Task findById(Long id){
-        Optional<Task> task = Optional.ofNullable(taskService.findById(id));
+        Optional<Task> task = this.taskRepository.findById(id);
         return task.orElseThrow(()-> new RuntimeException("Não foram encontrados usuários" +
                 "com esse ID!"));
     }
