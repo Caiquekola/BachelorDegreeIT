@@ -1,5 +1,6 @@
 package com.caiquekola.todosimple.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -56,6 +57,7 @@ public class User {
         this.tasks = tasks;
     }
 
+    @JsonIgnore
     public List<Task> getTasks() {
         return tasks;
     }
