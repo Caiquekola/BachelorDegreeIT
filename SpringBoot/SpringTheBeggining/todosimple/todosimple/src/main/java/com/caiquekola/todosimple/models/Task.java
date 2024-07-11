@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Table(name = Task.TABLE_NAME)
 public class Task {
 
-    protected static final String TABLE_NAME = "Task";
+    protected static final String TABLE_NAME = "task";
 
 
     @Id
@@ -54,6 +54,7 @@ public class Task {
     public void setUser(User user) {
         this.user = user;
     }
+
 
     public @Size(min = 5, max = 50) @NotNull @NotEmpty String getDescription() {
         return description;

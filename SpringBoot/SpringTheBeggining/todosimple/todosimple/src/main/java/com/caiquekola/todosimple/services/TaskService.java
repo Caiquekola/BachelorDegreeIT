@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TaskService {
-    @Autowired
-    private UserRepository userRepository;
+
     @Autowired
     private TaskRepository taskRepository;
 
@@ -26,10 +26,15 @@ public class TaskService {
                 "com esse ID!"));
     }
 
+    public List<Task> findAllByUserId(Long userId){
+        List<Task> tasks = this.taskRepository.findByUser_Id(userId);
+        return tasks;
+    }
+
     @Transactional
     public Task create(Task task){
-        User user = userService.findById(task.getUser().getId());
-        user.setId(null);
+        User user = this.userService.findById(task.getUser().getId());
+        task.setId(null);
         task.setUser(user);
         task = this.taskRepository.save(task);
         return task;
@@ -38,7 +43,6 @@ public class TaskService {
     @Transactional
     public Task update(Task task){
         Task newTask = findById(task.getId());
-        newTask.setId(null);
         newTask.setDescription(task.getDescription());
         return this.taskRepository.save(newTask);
     }
