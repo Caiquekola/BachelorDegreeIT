@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TesteAbrirFilePassword.iml" filepath="$PROJECT_DIR$/TesteAbrirFilePassword.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../arquivosTP/arquivosTP.iml" filepath="$PROJECT_DIR$/../arquivosTP/arquivosTP.iml" />
     </modules>
   </component>
 </project>
