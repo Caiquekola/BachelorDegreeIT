@@ -1,4 +1,4 @@
-package processimagebalckwhite;
+package processimageblackwhite;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -80,12 +80,12 @@ class ProcessImageBlackWhite extends Thread{
     public int[][] corrigirImagem(int imgMat[][]){
         int limLinha = imgMat.length - 1;
         int limColuna = imgMat[0].length - 1;
-        
+
         if(linhaF >= limLinha) linhaF = limLinha;
-        
+
         for (int linha = linhaI; linha <= linhaF; linha++) { //percorre as linhas
             for (int coluna = 0; coluna <= limColuna; coluna++) { //percorre as colunas
-                
+
                 int pixel = imgMat[linha][coluna];
                 if (pixel == 0 || pixel == 255) { //testa se é preto ou branco
                     int soma = 0;
@@ -132,7 +132,8 @@ class ProcessImageBlackWhite extends Thread{
 class Main{
     public static void main(String args[]){
 
-        File directory = new File("C:\\Users\\Caio Rievers\\Desktop\\Imagens\\modificadas");
+        File directory = new File("D:\\Projetos\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
+                "\\projeto e arquivos para o problema de imagens\\Imagens\\modificadas");
         File imagesFile[] = directory.listFiles();
 
         int numeroThreads = Runtime.getRuntime().availableProcessors();
@@ -142,7 +143,7 @@ class Main{
 
         for(File img : imagesFile){
             int imgMat[][] = ProcessImageBlackWhite.lerPixels(img.getAbsolutePath());
-
+            //Qnt de linha para cada "processador"
             qntPorLinha = imgMat.length/numeroThreads;
             linhaIni = 0;
 
