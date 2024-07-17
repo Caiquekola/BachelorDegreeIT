@@ -1,4 +1,4 @@
-package processimageblackwhite;
+package processimagebalckwhite;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -77,12 +77,15 @@ class ProcessImageBlackWhite extends Thread{
      *
      * @return Retorna uma matriz de pixels com os pontos corrigidos.
      */
-    public static int[][] corrigirImagem(int imgMat[][]){
-        int ultimaLinha = linhaF;
-        int ultimaColuna = colunaF;
-
-        for (int linha = linhaI; linha <= ultimaLinha; linha++) { //percorre as linhas
-            for (int coluna = colunaI; coluna <= ultimaColuna; coluna++) { //percorre as colunas
+    public int[][] corrigirImagem(int imgMat[][]){
+        int limLinha = imgMat.length - 1;
+        int limColuna = imgMat[0].length - 1;
+        
+        if(linhaF >= limLinha) linhaF = limLinha;
+        
+        for (int linha = linhaI; linha <= linhaF; linha++) { //percorre as linhas
+            for (int coluna = 0; coluna <= limColuna; coluna++) { //percorre as colunas
+                
                 int pixel = imgMat[linha][coluna];
                 if (pixel == 0 || pixel == 255) { //testa se é preto ou branco
                     int soma = 0;
@@ -92,7 +95,7 @@ class ProcessImageBlackWhite extends Thread{
                             int lin = linha + l;
                             int col = coluna + c;
                             if ( !(lin < 0 || col < 0) &&
-                                    (lin <= ultimaLinha && col <= ultimaColuna)) { //se a posição for válida
+                                    (lin <= limLinha && col <= limColuna)) { //se a posição for válida
                                 int pix = imgMat[lin][col];
                                 if (!(pix == 0 || pix == 255)) { //se n for preto/branco
                                     div++;
@@ -116,72 +119,58 @@ class ProcessImageBlackWhite extends Thread{
     }
 
     private static int imgMat[][];
-    private static int linhaI;
-    private static int linhaF;
-    private static int colunaI;
-    private static int colunaF;
+    private int linhaI;
+    private int linhaF;
 
-    public ProcessImageBlackWhite(int imgMat[][], int linhaI, int linhaF, int colunaI, int colunaF) {
+    public ProcessImageBlackWhite(int imgMat[][], int linhaI, int linhaF) {
         this.imgMat = imgMat;
         this.linhaI = linhaI;
         this.linhaF = linhaF;
-        this.colunaI = colunaI;
-        this.colunaF = colunaF;
     }
 }
 
 class Main{
     public static void main(String args[]){
 
-        File directory = new File("D:\\Projetos\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
-                "\\projeto e arquivos para o problema de imagens\\Imagens\\modificadas");
+        File directory = new File("C:\\Users\\Caio Rievers\\Desktop\\Imagens\\modificadas");
         File imagesFile[] = directory.listFiles();
 
         int numeroThreads = Runtime.getRuntime().availableProcessors();
-        int linhaIni = 0, linhaFim = 0, colunaIni = 0, colunaFim = 0;
-        int qntPorLinha=0, qntPorColuna=0;
+        int linhaIni = 0;
+        int qntPorLinha=0;
         ProcessImageBlackWhite[] processadores = new ProcessImageBlackWhite[numeroThreads];
 
+        for(File img : imagesFile){
+            int imgMat[][] = ProcessImageBlackWhite.lerPixels(img.getAbsolutePath());
 
+            qntPorLinha = imgMat.length/numeroThreads;
+            linhaIni = 0;
 
-            for(File img : imagesFile){
-                int imgMat[][] = ProcessImageBlackWhite.lerPixels(img.getAbsolutePath());
+            for (int i = 0; i < numeroThreads; i++) {
 
-                qntPorLinha = imgMat.length/numeroThreads;
-                qntPorColuna = imgMat[0].length/numeroThreads;
+                processadores[i] = new ProcessImageBlackWhite(imgMat,linhaIni,linhaIni+qntPorLinha);
+                processadores[i].start();
 
-                for (int i = 0; i < numeroThreads; i++) {
-
-
-                    processadores[i] = new ProcessImageBlackWhite(imgMat,linhaIni,linhaIni+qntPorLinha,colunaIni,colunaIni+qntPorColuna);
-                    processadores[i].start();
-
-                    if(i!=numeroThreads-1){
-                        linhaIni += qntPorLinha;
-                        colunaIni += qntPorColuna;
-                    }else{
-                        linhaIni = imgMat.length-linhaIni;
-                        colunaIni = imgMat[0].length-colunaIni;
-                    }
-
-                }
-                //grava nova imagem com as correções
-                for (ProcessImageBlackWhite p: processadores){
-                    try {
-                        p.join();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                if(i!=numeroThreads-1){
+                    linhaIni += qntPorLinha+1;
+                }else{
+                    linhaIni = imgMat.length-linhaIni-1;
                 }
 
-                if(imgMat != null){
-                    ProcessImageBlackWhite.gravarPixels(img.getAbsolutePath(), imgMat);
+            }
+            //grava nova imagem com as correções
+            for (ProcessImageBlackWhite p: processadores){
+                try {
+                    p.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
 
-
-
+            if(imgMat != null){
+                ProcessImageBlackWhite.gravarPixels(img.getAbsolutePath(), imgMat);
+            }
+        }
 
     }
 }
-
