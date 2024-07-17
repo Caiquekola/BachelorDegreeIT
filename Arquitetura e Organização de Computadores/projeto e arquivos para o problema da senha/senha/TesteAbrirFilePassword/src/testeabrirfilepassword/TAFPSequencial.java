@@ -1,17 +1,18 @@
 package testeabrirfilepassword;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
-import java.util.List;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.FileHeader;
 
-public class TesteAbrirFilePassword extends Thread{
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.util.List;
+
+public class TAFPSequencial{
 
     //Nome do arquivo TODO alterar para forma iterativa
-    public static final String nomeArquivo = "letrasAAA";
+    public static final String nomeArquivo = "doc2";
     //Caminho absoluto da pasta
     public static final String caminho = "D:\\PROJETOS\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
             "\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
@@ -44,7 +45,7 @@ public class TesteAbrirFilePassword extends Thread{
                 return true;
             }
 
-        } catch (net.lingala.zip4j.exception.ZipException ex) {
+        } catch (ZipException ex) {
             //erro na extração do arquivo
             return false;
         } catch (FileNotFoundException e) {
@@ -55,7 +56,7 @@ public class TesteAbrirFilePassword extends Thread{
     }
 
 
-    public static void forcaBruta(int min, int max){
+    public static void forcaBruta(){
         //126 - Space até ~ (Tabela ASCII)
         //3 Senhas
         int posicao0 =  0;
@@ -66,7 +67,7 @@ public class TesteAbrirFilePassword extends Thread{
 
         char[] senha = new char[tamanho];
 
-        for(int ascii2 = min; ascii2 <= max; ascii2++){
+        for(int ascii2 = 32; ascii2 <= 127; ascii2++){
 
             for(int ascii1 = 32; ascii1 <= 127; ascii1++){
 
@@ -93,37 +94,9 @@ public class TesteAbrirFilePassword extends Thread{
 
     }
 
-    @Override
-    public void run() {
-        forcaBruta(32,126);
-    }
-    private int min;
-    private int max;
-    public TesteAbrirFilePassword() {
-        min = 32;
-        max = 126;
-    }
-    public TesteAbrirFilePassword(int min, int max) {
-        this.min = min;
-        this.max = max;
-    }
-
-}
-
-class Main{
     public static void main(String[] args) {
-        //Força bruta
-        int numCpu = Runtime.getRuntime().availableProcessors();
-        float numCaracteres = 94.0f;
-        int qntCaracteresNucleo = (int) Math.ceil(numCaracteres/numCpu);
-
-        System.out.println(qntCaracteresNucleo);
-
-        TesteAbrirFilePassword[] testadores = new TesteAbrirFilePassword[numCpu];
-        for (int i = 0; i < numCpu; i++) {
-            testadores[i] = new TesteAbrirFilePassword();
-        }
-
+        forcaBruta();
     }
 }
+
 
