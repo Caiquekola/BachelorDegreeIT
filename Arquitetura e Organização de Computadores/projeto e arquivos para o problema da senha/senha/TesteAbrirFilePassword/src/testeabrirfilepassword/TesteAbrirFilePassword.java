@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.model.FileHeader;
@@ -72,7 +73,7 @@ public class TesteAbrirFilePassword extends Thread{
                 for (int ascii0 = 32; ascii0 <= 126; ascii0++) {
                     senha[posicao0] = (char)ascii0;
                     if(testaSenha(String.valueOf(senha,0,posicao0+1))){
-                        senhaDescoberta = true;
+                        senhaDescoberta.set(true);
                         Main.tempoF = System.currentTimeMillis();
                         System.out.println(Main.tempoF-Main.tempoI);
                         return;
@@ -111,12 +112,12 @@ public class TesteAbrirFilePassword extends Thread{
     }
     public boolean getSenhaDescoberta() {
         synchronized (trava){
-            return senhaDescoberta;
+            return senhaDescoberta.get();
         }
     }
 
     public Object trava = new Object();
-    public static boolean senhaDescoberta = false;
+    public static AtomicBoolean senhaDescoberta = new AtomicBoolean(false);
 }
 
 class Main{
@@ -137,7 +138,7 @@ class Main{
 
         TesteAbrirFilePassword[] testadores = new TesteAbrirFilePassword[numCpu];
 
-        tempoI = System.currentTimeMillis();
+
         //TODO Criar metodo para abrir todos os docs
         //File imagesFile[] = directory.listFiles();
         File caminho = new File(TesteAbrirFilePassword.caminho);
@@ -150,12 +151,13 @@ class Main{
         int contadorZips = 2;
         for(File todosArquivos: arquivos){
             minValue = 32;
-            maxValue = 32+qntCaracteresNucleo;
-
+            maxValue = 31+qntCaracteresNucleo;
+            tempoI = System.currentTimeMillis();
             for (int i = 0; i < numCpu; i++) {
                 //Se o testador for o último passe a quantidade restante de caracteres
                 if(i==numCpu-1){
                     testadores[i] = new TesteAbrirFilePassword(minValue, 126-maxValue);
+                    break;
                 }
                 testadores[i] = new TesteAbrirFilePassword(minValue, maxValue);
                 minValue = maxValue+1;
@@ -165,9 +167,15 @@ class Main{
             for(TesteAbrirFilePassword t : testadores){
                 t.start();
             }
+            for(TesteAbrirFilePassword t : testadores){
+                try {
+                    t.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
-
-            TesteAbrirFilePassword.senhaDescoberta = false;
+            TesteAbrirFilePassword.senhaDescoberta.set(false);
             TesteAbrirFilePassword.numeroArquivo = String.valueOf(contadorZips);
             contadorZips++;
 
