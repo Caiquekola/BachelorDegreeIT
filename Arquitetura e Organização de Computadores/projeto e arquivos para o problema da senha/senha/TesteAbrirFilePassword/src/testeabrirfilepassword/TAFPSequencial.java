@@ -12,10 +12,12 @@ import java.util.List;
 public class TAFPSequencial{
 
     //Nome do arquivo TODO alterar para forma iterativa
-    public static final String nomeArquivo = "doc2";
+    public static String numeroArquivo ="1";
+    //"doc"+numeroArquivo
+    public static final String nomeArquivo = "seloco";
     //Caminho absoluto da pasta
-    public static final String caminho = "D:\\PROJETOS\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
-            "\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
+    public static final String caminho = "C:\\Users\\Caique\\Documents\\BachelorDegreeIT" +
+            "\\Arquitetura e Organização de Computadores\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
 
 
     public static boolean testaSenha(String senha){
