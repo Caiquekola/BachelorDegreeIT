@@ -16,9 +16,11 @@ public class TesteAbrirFilePassword extends Thread{
     public static String numeroArquivo ="1";
     public static String nomeArquivo = "doc"+numeroArquivo;
     //Caminho absoluto da pasta
-    public static final String caminho = "C:\\Users\\Caique\\Documents\\BachelorDegreeIT" +
-            "\\Arquitetura e Organização de Computadores\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
+    public static final String caminho = "D:\\Projetos\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
+            "\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
 
+    private final int min;
+    private final int max;
 
     public static boolean testaSenha(String senha){
         //Criar o ZipFile
@@ -71,6 +73,7 @@ public class TesteAbrirFilePassword extends Thread{
         for(int ascii2 = min; ascii2 <= max; ascii2++){
             for(int ascii1 = 32; ascii1 <= 127; ascii1++){
                 for (int ascii0 = 32; ascii0 <= 126; ascii0++) {
+
                     senha[posicao0] = (char)ascii0;
                     if(testaSenha(String.valueOf(senha,0,posicao0+1))){
                         senhaDescoberta.set(true);
@@ -99,16 +102,22 @@ public class TesteAbrirFilePassword extends Thread{
     public void run() {
         forcaBruta(min,max);
     }
-    private final int min;
-    private final int max;
+
 
     public TesteAbrirFilePassword() {
         min = 32;
         max = 126;
     }
-    public TesteAbrirFilePassword(int min, int max) {
+    public TesteAbrirFilePassword(String numeroArquivo, int min, int max) {
+        this.numeroArquivo = numeroArquivo;
+        this.nomeArquivo = "doc"+this.numeroArquivo;
         this.min = min;
-        this.max = max;
+        if(max>126){
+            this.max = 126;
+        }else{
+            this.max = max;
+        }
+
     }
     public boolean getSenhaDescoberta() {
         synchronized (trava){
@@ -122,44 +131,44 @@ public class TesteAbrirFilePassword extends Thread{
 
 class Main{
 
-    public static long tempoF = 0l;
-    public static long tempoI = 0l;
+    public static long tempoF = 0L;
+    public static long tempoI = 0L;
 
 
     public static void main(String[] args) {
-        //Força bruta
+
+
         int numCpu = Runtime.getRuntime().availableProcessors();
+        //Número de Caracteres totais, de espaço até ~
         float numCaracteres = 94.0f;
         int qntCaracteresNucleo = (int) Math.ceil(numCaracteres/numCpu);
+
         int minValue = 32;
-        int maxValue = 32+qntCaracteresNucleo;
-
-        System.out.println(qntCaracteresNucleo);
-
+        int maxValue = 31+qntCaracteresNucleo;
         TesteAbrirFilePassword[] testadores = new TesteAbrirFilePassword[numCpu];
 
 
-        //TODO Criar metodo para abrir todos os docs
-        //File imagesFile[] = directory.listFiles();
         File caminho = new File(TesteAbrirFilePassword.caminho);
         File arquivos[] = caminho.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.toLowerCase().startsWith("doc");
+                return name.toLowerCase().startsWith("doc") & name.toLowerCase().endsWith(".zip");
             }
         });
-        int contadorZips = 2;
+
+        int contadorZips = 0;
+
         for(File todosArquivos: arquivos){
+
+            contadorZips++;
+
+
             minValue = 32;
             maxValue = 31+qntCaracteresNucleo;
             tempoI = System.currentTimeMillis();
             for (int i = 0; i < numCpu; i++) {
                 //Se o testador for o último passe a quantidade restante de caracteres
-                if(i==numCpu-1){
-                    testadores[i] = new TesteAbrirFilePassword(minValue, 126-maxValue);
-                    break;
-                }
-                testadores[i] = new TesteAbrirFilePassword(minValue, maxValue);
+                testadores[i] = new TesteAbrirFilePassword(String.valueOf(contadorZips),minValue, maxValue);
                 minValue = maxValue+1;
                 maxValue += qntCaracteresNucleo;
             }
@@ -176,8 +185,7 @@ class Main{
             }
 
             TesteAbrirFilePassword.senhaDescoberta.set(false);
-            TesteAbrirFilePassword.numeroArquivo = String.valueOf(contadorZips);
-            contadorZips++;
+
 
         }
         //TODO Abrir, gerenciar a pasta final e mostrar a senha

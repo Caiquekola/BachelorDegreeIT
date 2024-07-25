@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="arquivosTP">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/senha/arquivosTP/seloco.zip!/" />
+      <root url="jar://$PROJECT_DIR$/senha/arquivosTP/doc3.zip!/" />
+      <root url="jar://$PROJECT_DIR$/senha/arquivosTP/final.zip!/" />
+      <root url="jar://$PROJECT_DIR$/senha/arquivosTP/doc1.zip!/" />
+      <root url="jar://$PROJECT_DIR$/senha/arquivosTP/doc4.zip!/" />
+      <root url="jar://$PROJECT_DIR$/senha/arquivosTP/doc2.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

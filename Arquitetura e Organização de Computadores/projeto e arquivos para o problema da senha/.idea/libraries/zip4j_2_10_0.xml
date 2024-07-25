@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="zip4j-2.10.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/senha/TesteAbrirFilePassword/lib/zip4j-2.10.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

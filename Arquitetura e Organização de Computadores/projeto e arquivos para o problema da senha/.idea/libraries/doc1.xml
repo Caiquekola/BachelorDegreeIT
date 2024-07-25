@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="doc1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/senha/TesteAbrirFilePassword/doc1.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
