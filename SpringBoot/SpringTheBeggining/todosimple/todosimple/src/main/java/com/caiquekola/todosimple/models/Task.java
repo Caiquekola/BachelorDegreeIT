@@ -1,5 +1,6 @@
 package com.caiquekola.todosimple.models;
 
+import lombok.*;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -9,6 +10,11 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = Task.TABLE_NAME)
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Task {
 
     protected static final String TABLE_NAME = "task";
@@ -30,37 +36,6 @@ public class Task {
     private String description;
 
 
-    public Task() {
-    }
-
-    public Task(Long id, User user, String description) {
-        this.id = id;
-        this.user = user;
-        this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
 
-    public @Size(min = 5, max = 50) @NotNull @NotEmpty String getDescription() {
-        return description;
-    }
-
-    public void setDescription(@Size(min = 5, max = 50) @NotNull @NotEmpty String description) {
-        this.description = description;
-    }
 }
