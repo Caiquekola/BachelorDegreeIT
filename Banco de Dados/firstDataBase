@@ -1,0 +1,23 @@
+drop database cadastro;
+create database cadastro default character set utf8mb3 default collate utf8_general_ci;
+
+use cadastro;
+
+show tables;
+
+create table pessoa(
+	id INTEGER not null auto_increment unique,
+    nome varchar(30) not null,
+    nascimento date,
+    sexo enum('M','F'),
+    peso DECIMAL(5,2),
+    altura decimal(3,2),
+    nacionalidade varchar(20) default 'Brasileira',
+    primary key (id)
+)default charset = utf8mb4;
+
+drop table pessoa;
+
+select * from pessoa;
+
+describe pessoa;
