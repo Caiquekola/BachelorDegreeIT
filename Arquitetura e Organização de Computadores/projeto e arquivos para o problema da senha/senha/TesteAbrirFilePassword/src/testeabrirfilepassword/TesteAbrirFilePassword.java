@@ -11,10 +11,25 @@ import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.model.FileHeader;
 
 public class TesteAbrirFilePassword extends Thread{
-
+    public static Object trava = new Object();
+    public static AtomicBoolean senhaDescoberta = new AtomicBoolean(false);
     //Nome do arquivo TODO alterar para forma iterativa
-    public static String numeroArquivo ="1";
-    public static String nomeArquivo = "doc"+numeroArquivo;
+    public static String numeroArquivo = "1";
+
+    public static String getNumeroArquivo() {
+         synchronized (trava){
+             return numeroArquivo;
+         }
+    }
+    public static void setNumeroArquivo(String numeroArquivo) {
+        synchronized (trava){
+            TesteAbrirFilePassword.numeroArquivo = numeroArquivo;
+        }
+    }
+
+
+
+    public static String nomeArquivo = "doc"+getNumeroArquivo();
     //Caminho absoluto da pasta
     public static final String caminho = "D:\\Projetos\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
             "\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
@@ -109,8 +124,8 @@ public class TesteAbrirFilePassword extends Thread{
         max = 126;
     }
     public TesteAbrirFilePassword(String numeroArquivo, int min, int max) {
-        this.numeroArquivo = numeroArquivo;
-        this.nomeArquivo = "doc"+this.numeroArquivo;
+        setNumeroArquivo(numeroArquivo);
+        this.nomeArquivo = "doc"+getNumeroArquivo();
         this.min = min;
         if(max>126){
             this.max = 126;
@@ -125,8 +140,7 @@ public class TesteAbrirFilePassword extends Thread{
         }
     }
 
-    public Object trava = new Object();
-    public static AtomicBoolean senhaDescoberta = new AtomicBoolean(false);
+
 }
 
 class Main{
