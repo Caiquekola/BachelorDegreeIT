@@ -173,10 +173,7 @@ class Main{
         int contadorZips = 0;
 
         for(File todosArquivos: arquivos){
-
             contadorZips++;
-
-
             minValue = 32;
             maxValue = 31+qntCaracteresNucleo;
             tempoI = System.currentTimeMillis();
@@ -186,7 +183,6 @@ class Main{
                 minValue = maxValue+1;
                 maxValue += qntCaracteresNucleo;
             }
-
             for(TesteAbrirFilePassword t : testadores){
                 t.start();
             }
@@ -197,10 +193,7 @@ class Main{
                     throw new RuntimeException(e);
                 }
             }
-
             TesteAbrirFilePassword.senhaDescoberta.set(false);
-
-
         }
         //TODO Abrir, gerenciar a pasta final e mostrar a senha
 
