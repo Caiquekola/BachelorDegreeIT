@@ -16,9 +16,9 @@ public class TesteAbrirFilePassword extends Thread{
     public static String numeroArquivo = "1";
 
     public static String getNumeroArquivo() {
-         synchronized (trava){
-             return numeroArquivo;
-         }
+        synchronized (trava){
+            return numeroArquivo;
+        }
     }
     public static void setNumeroArquivo(String numeroArquivo) {
         synchronized (trava){
@@ -150,16 +150,16 @@ class Main{
     public static void main(String[] args) {
 
 
-//        int numCpu = Runtime.getRuntime().availableProcessors();
-//        //Número de Caracteres totais, de espaço até ~
-//        float numCaracteres = 94.0f;
-//        int qntCaracteresNucleo = (int) Math.ceil(numCaracteres/numCpu);
-//
-//        int minValue = 32;
-//        int maxValue = 31+qntCaracteresNucleo;
-//        TesteAbrirFilePassword[] testadores = new TesteAbrirFilePassword[numCpu];
-//
-//
+        int numCpu = Runtime.getRuntime().availableProcessors();
+        //Número de Caracteres totais, de espaço até ~
+        float numCaracteres = 94.0f;
+        int qntCaracteresNucleo = (int) Math.ceil(numCaracteres/numCpu);
+
+        int minValue = 32;
+        int maxValue = 31+qntCaracteresNucleo;
+        TesteAbrirFilePassword[] testadores = new TesteAbrirFilePassword[numCpu];
+
+
         File caminho = new File(TesteAbrirFilePassword.caminho);
         File arquivos[] = caminho.listFiles(new FilenameFilter() {
             @Override
@@ -167,32 +167,32 @@ class Main{
                 return name.toLowerCase().startsWith("doc") & name.toLowerCase().endsWith(".zip");
             }
         });
-//
-//        int contadorZips = 0;
-//
-//        for(File todosArquivos: arquivos){
-//            contadorZips++;
-//            minValue = 32;
-//            maxValue = 31+qntCaracteresNucleo;
-//            tempoI = System.currentTimeMillis();
-//            for (int i = 0; i < numCpu; i++) {
-//                //Se o testador for o último passe a quantidade restante de caracteres
-//                testadores[i] = new TesteAbrirFilePassword(String.valueOf(contadorZips),minValue, maxValue);
-//                minValue = maxValue+1;
-//                maxValue += qntCaracteresNucleo;
-//            }
-//            for(TesteAbrirFilePassword t : testadores){
-//                t.start();
-//            }
-//            for(TesteAbrirFilePassword t : testadores){
-//                try {
-//                    t.join();
-//                } catch (InterruptedException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//            TesteAbrirFilePassword.senhaDescoberta.set(false);
-//        }
+
+        int contadorZips = 0;
+
+        for(File todosArquivos: arquivos){
+            contadorZips++;
+            minValue = 32;
+            maxValue = 31+qntCaracteresNucleo;
+            tempoI = System.currentTimeMillis();
+            for (int i = 0; i < numCpu; i++) {
+                //Se o testador for o último passe a quantidade restante de caracteres
+                testadores[i] = new TesteAbrirFilePassword(String.valueOf(contadorZips),minValue, maxValue);
+                minValue = maxValue+1;
+                maxValue += qntCaracteresNucleo;
+            }
+            for(TesteAbrirFilePassword t : testadores){
+                t.start();
+            }
+            for(TesteAbrirFilePassword t : testadores){
+                try {
+                    t.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            TesteAbrirFilePassword.senhaDescoberta.set(false);
+        }
         //TODO Abrir, gerenciar a pasta final e mostrar a senha
         arquivos = new File[4];
         for(int i = 0; i < arquivos.length; i++){
@@ -214,7 +214,7 @@ class Main{
         }
         ZipFile zipFinal = new ZipFile(new File(caminho+"\\final.zip"));
 
-            //encriptado?
+        //encriptado?
         try {
             if (zipFinal.isEncrypted()) {
                 zipFinal.setPassword(ultimaSenha.toCharArray());
