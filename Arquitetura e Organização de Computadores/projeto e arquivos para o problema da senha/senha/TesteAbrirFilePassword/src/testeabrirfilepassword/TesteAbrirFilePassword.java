@@ -1,13 +1,12 @@
 package testeabrirfilepassword;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.FileHeader;
 
 public class TesteAbrirFilePassword extends Thread{
@@ -28,10 +27,9 @@ public class TesteAbrirFilePassword extends Thread{
     }
 
 
-
     public static String nomeArquivo = "doc"+getNumeroArquivo();
     //Caminho absoluto da pasta
-    public static final String caminho = "D:\\Projetos\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
+    public static final String caminho = "C:\\Users\\Caique\\Documents\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
             "\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
 
     private final int min;
@@ -57,7 +55,7 @@ public class TesteAbrirFilePassword extends Thread{
                 //Exibo a senha no Console
                 System.out.println("\nSenha descoberta! ("+senha+")");
                 //Criação de um arquivo chamda 'SENHA' com a senha do ZIP encontrada
-                File file = new File(caminho+"\\"+nomeArquivo+"\\Senha.txt");
+                File file = new File(caminho+"\\"+nomeArquivo+"\\"+nomeArquivo+"Senha.txt");
                 PrintStream ps = new PrintStream(file);
                 ps.println(senha);
                 ps.close();
@@ -152,16 +150,16 @@ class Main{
     public static void main(String[] args) {
 
 
-        int numCpu = Runtime.getRuntime().availableProcessors();
-        //Número de Caracteres totais, de espaço até ~
-        float numCaracteres = 94.0f;
-        int qntCaracteresNucleo = (int) Math.ceil(numCaracteres/numCpu);
-
-        int minValue = 32;
-        int maxValue = 31+qntCaracteresNucleo;
-        TesteAbrirFilePassword[] testadores = new TesteAbrirFilePassword[numCpu];
-
-
+//        int numCpu = Runtime.getRuntime().availableProcessors();
+//        //Número de Caracteres totais, de espaço até ~
+//        float numCaracteres = 94.0f;
+//        int qntCaracteresNucleo = (int) Math.ceil(numCaracteres/numCpu);
+//
+//        int minValue = 32;
+//        int maxValue = 31+qntCaracteresNucleo;
+//        TesteAbrirFilePassword[] testadores = new TesteAbrirFilePassword[numCpu];
+//
+//
         File caminho = new File(TesteAbrirFilePassword.caminho);
         File arquivos[] = caminho.listFiles(new FilenameFilter() {
             @Override
@@ -169,35 +167,76 @@ class Main{
                 return name.toLowerCase().startsWith("doc") & name.toLowerCase().endsWith(".zip");
             }
         });
-
-        int contadorZips = 0;
-
-        for(File todosArquivos: arquivos){
-            contadorZips++;
-            minValue = 32;
-            maxValue = 31+qntCaracteresNucleo;
-            tempoI = System.currentTimeMillis();
-            for (int i = 0; i < numCpu; i++) {
-                //Se o testador for o último passe a quantidade restante de caracteres
-                testadores[i] = new TesteAbrirFilePassword(String.valueOf(contadorZips),minValue, maxValue);
-                minValue = maxValue+1;
-                maxValue += qntCaracteresNucleo;
-            }
-            for(TesteAbrirFilePassword t : testadores){
-                t.start();
-            }
-            for(TesteAbrirFilePassword t : testadores){
+//
+//        int contadorZips = 0;
+//
+//        for(File todosArquivos: arquivos){
+//            contadorZips++;
+//            minValue = 32;
+//            maxValue = 31+qntCaracteresNucleo;
+//            tempoI = System.currentTimeMillis();
+//            for (int i = 0; i < numCpu; i++) {
+//                //Se o testador for o último passe a quantidade restante de caracteres
+//                testadores[i] = new TesteAbrirFilePassword(String.valueOf(contadorZips),minValue, maxValue);
+//                minValue = maxValue+1;
+//                maxValue += qntCaracteresNucleo;
+//            }
+//            for(TesteAbrirFilePassword t : testadores){
+//                t.start();
+//            }
+//            for(TesteAbrirFilePassword t : testadores){
+//                try {
+//                    t.join();
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//            TesteAbrirFilePassword.senhaDescoberta.set(false);
+//        }
+        //TODO Abrir, gerenciar a pasta final e mostrar a senha
+        arquivos = new File[4];
+        for(int i = 0; i < arquivos.length; i++){
+            int j = i+1;
+            arquivos[i] = new File(caminho+"\\doc"+j+"\\doc"+j+"Senha.txt");
+        }
+        String ultimaSenha = "";
+        if(arquivos.length!=0){
+            for(File arquivo: arquivos){
                 try {
-                    t.join();
-                } catch (InterruptedException e) {
+                    ultimaSenha += new String(Files.readAllBytes(arquivo.toPath())).replaceAll("\r", "").replaceAll("\n", "");
+                    System.out.println(ultimaSenha);
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
-            TesteAbrirFilePassword.senhaDescoberta.set(false);
+        }else{
+            throw new RuntimeException("Erro, não é possível descriptografar a senha do arquivo final");
         }
-        //TODO Abrir, gerenciar a pasta final e mostrar a senha
+        ZipFile zipFinal = new ZipFile(new File(caminho+"\\final.zip"));
 
+            //encriptado?
+        try {
+            if (zipFinal.isEncrypted()) {
+                zipFinal.setPassword(ultimaSenha.toCharArray());
+                List fileHeaderList = zipFinal.getFileHeaders();
 
+                for (int i = 0; i < fileHeaderList.size(); i++) {
+                    FileHeader fileHeader = (FileHeader) fileHeaderList.get(i);
+//                Onde desejo extrair! Neste caso, desejo extrair em uma pasta com o mesmo
+//                Nome do arquivo
+                    zipFinal.extractFile(fileHeader, caminho+"\\final");
+                    //Exibo a senha no Console
+                    System.out.println("\nSenha descoberta! ("+ultimaSenha+")");
+                    //Criação de um arquivo chamda 'SENHA' com a senha do ZIP encontrada
+                    File file = new File(caminho+"\\Final\\FinalSenha.txt");
+                    PrintStream ps = new PrintStream(file);
+                    ps.println(ultimaSenha);
+                    ps.close();
+                }
+            }
+        } catch (ZipException | FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }
