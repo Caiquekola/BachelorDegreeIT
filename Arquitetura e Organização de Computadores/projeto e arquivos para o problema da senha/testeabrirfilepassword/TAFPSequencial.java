@@ -9,31 +9,30 @@ import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.FileHeader;
 
-public class TAFPSequencial extends Thread{
-    public static Object trava = new Object();
-    public static AtomicBoolean senhaDescoberta = new AtomicBoolean(false);
+public class TAFPSequencial{
     //Nome do arquivo TODO alterar para forma iterativa
-    public static String numeroArquivo = "1";
-
-    public static String getNumeroArquivo() {
-        synchronized (trava){
-            return numeroArquivo;
-        }
-    }
-    public static void setNumeroArquivo(String numeroArquivo) {
-        synchronized (trava){
-            TAFPSequencial.numeroArquivo = numeroArquivo;
-        }
-    }
-
-
-    public static String nomeArquivo = "doc"+getNumeroArquivo();
+    public static String numeroArquivo;
+    public static String nomeArquivo;
     //Caminho absoluto da pasta
     public static final String caminho = "C:\\Users\\Caique\\Documents\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
             "\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
 
     private final int min;
     private final int max;
+
+    public TAFPSequencial(String numeroArquivo, int min, int max) {
+        this.numeroArquivo = numeroArquivo;
+        this.nomeArquivo = "doc"+numeroArquivo;
+        this.min = min;
+        if(max>126){
+            this.max = 126;
+        }else{
+            this.max = max;
+        }
+
+    }
+
+
 
     public static boolean testaSenha(String senha){
         //Criar o ZipFile
@@ -79,6 +78,7 @@ public class TAFPSequencial extends Thread{
         int posicao0 =  0;
         int posicao1 = 0;
         int posicao2 = 0;
+        //Tamanho da senha (neste caso três caracteres)
         int tamanho = 3;
 
 
@@ -86,57 +86,28 @@ public class TAFPSequencial extends Thread{
         for(int ascii2 = min; ascii2 <= max; ascii2++){
             for(int ascii1 = 32; ascii1 <= 127; ascii1++){
                 for (int ascii0 = 32; ascii0 <= 126; ascii0++) {
-
                     senha[posicao0] = (char)ascii0;
                     if(testaSenha(String.valueOf(senha,0,posicao0+1))){
-                        senhaDescoberta.set(true);
                         MainSequencial.tempoF = System.currentTimeMillis();
                         System.out.println(MainSequencial.tempoF-MainSequencial.tempoI);
                         return;
                     }else{
-                        if(getSenhaDescoberta()){
-                            ascii2= max+1;
-                            ascii1 = 128;
-                            ascii0 = 127;
-                        }
                         System.out.print("["+String.valueOf((senha),0,(posicao0+1))+"] ");
                     }
+
                 }
                 senha[posicao1] = (char)ascii1;
+                //Quando acaba o primeiro for eu garanto que o primeiro caracter vai ser testado todas as possibiliddades
+                //E o for de dentro pula para a segunda posição
                 posicao0 = posicao1 + 1;
             }
-
             posicao1 = 1;
             senha[posicao2] = (char)ascii2;
         }
     }
 
-    @Override
-    public void run() {
-        forcaBruta(min,max);
-    }
 
 
-    public TAFPSequencial() {
-        min = 32;
-        max = 126;
-    }
-    public TAFPSequencial(String numeroArquivo, int min, int max) {
-        setNumeroArquivo(numeroArquivo);
-        this.nomeArquivo = "doc"+getNumeroArquivo();
-        this.min = min;
-        if(max>126){
-            this.max = 126;
-        }else{
-            this.max = max;
-        }
-
-    }
-    public boolean getSenhaDescoberta() {
-        synchronized (trava){
-            return senhaDescoberta.get();
-        }
-    }
 
 
 }
@@ -147,20 +118,16 @@ class MainSequencial{
     public static long tempoI = 0L;
 
 
-    public static void MainSequencial(String[] args) {
+    public static void main(String[] args) {
 
 
         int numCpu = Runtime.getRuntime().availableProcessors();
         //Número de Caracteres totais, de espaço até ~
-        float numCaracteres = 94.0f;
-        int qntCaracteresNucleo = (int) Math.ceil(numCaracteres/numCpu);
-
         int minValue = 32;
-        int maxValue = 31+qntCaracteresNucleo;
-        TAFPSequencial[] testadores = new TAFPSequencial[numCpu];
-
+        int maxValue = 126;
 
         File caminho = new File(TAFPSequencial.caminho);
+        //Adiciono todos os zips dentro de um vetor de file
         File arquivos[] = caminho.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
@@ -168,33 +135,17 @@ class MainSequencial{
             }
         });
 
-        int contadorZips = 0;
-
+        int contadorZips = 1;
+        TAFPSequencial quebradorDeSenha;
         for(File todosArquivos: arquivos){
+            quebradorDeSenha = new TAFPSequencial(String.valueOf(contadorZips), minValue, maxValue);
             contadorZips++;
-            minValue = 32;
-            maxValue = 31+qntCaracteresNucleo;
             tempoI = System.currentTimeMillis();
-            for (int i = 0; i < numCpu; i++) {
-                //Se o testador for o último passe a quantidade restante de caracteres
-                testadores[i] = new TAFPSequencial(String.valueOf(contadorZips),minValue, maxValue);
-                minValue = maxValue+1;
-                maxValue += qntCaracteresNucleo;
-            }
-            for(TAFPSequencial t : testadores){
-                t.start();
-            }
-            for(TAFPSequencial t : testadores){
-                try {
-                    t.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            TAFPSequencial.senhaDescoberta.set(false);
+            quebradorDeSenha.forcaBruta(minValue,maxValue);
         }
         //TODO Abrir, gerenciar a pasta final e mostrar a senha
-        arquivos = new File[4];
+
+        arquivos = new File[contadorZips];
         for(int i = 0; i < arquivos.length; i++){
             int j = i+1;
             arquivos[i] = new File(caminho+"\\doc"+j+"\\doc"+j+"Senha.txt");
