@@ -1,4 +1,4 @@
-package processimageblackwhite;
+package processimagebalckwhite;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
