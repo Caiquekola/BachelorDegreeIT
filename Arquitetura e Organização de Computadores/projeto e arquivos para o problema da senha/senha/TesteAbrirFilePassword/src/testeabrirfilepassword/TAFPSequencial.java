@@ -14,8 +14,7 @@ public class TAFPSequencial{
     public static String numeroArquivo;
     public static String nomeArquivo;
     //Caminho absoluto da pasta
-    public static final String caminho = "C:\\Users\\Caique\\Documents\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
-            "\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
+    public static final String caminho = "D:\\Projetos\\BachelorDegreeIT\\Arquitetura e Organização de Computadores\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
 
     private final int min;
     private final int max;
@@ -57,6 +56,7 @@ public class TAFPSequencial{
                 File file = new File(caminho+"\\"+nomeArquivo+"\\"+nomeArquivo+"Senha.txt");
                 PrintStream ps = new PrintStream(file);
                 ps.println(senha);
+                ps.println(System.currentTimeMillis()-MainSequencial.tempoI);
                 ps.close();
                 return true;
             }
@@ -182,6 +182,8 @@ class MainSequencial{
                     File file = new File(caminho+"\\Final\\FinalSenha.txt");
                     PrintStream ps = new PrintStream(file);
                     ps.println(ultimaSenha);
+                    MainSequencial.tempoF = System.currentTimeMillis();
+                    ps.println(MainSequencial.tempoF-MainSequencial.tempoI);
                     ps.close();
                 }
             }

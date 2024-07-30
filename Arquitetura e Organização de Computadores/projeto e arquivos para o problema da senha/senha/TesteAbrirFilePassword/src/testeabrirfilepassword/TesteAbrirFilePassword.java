@@ -9,12 +9,13 @@ import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.FileHeader;
 
+import static testeabrirfilepassword.Main.tempoI;
+
 public class TesteAbrirFilePassword extends Thread{
     public static Object trava = new Object();
     public static AtomicBoolean senhaDescoberta = new AtomicBoolean(false);
     //Nome do arquivo TODO alterar para forma iterativa
     public static String numeroArquivo = "1";
-
     public static String getNumeroArquivo() {
         synchronized (trava){
             return numeroArquivo;
@@ -25,13 +26,9 @@ public class TesteAbrirFilePassword extends Thread{
             TesteAbrirFilePassword.numeroArquivo = numeroArquivo;
         }
     }
-
-
     public static String nomeArquivo = "doc"+getNumeroArquivo();
     //Caminho absoluto da pasta
-    public static final String caminho = "C:\\Users\\Caique\\Documents\\BachelorDegreeIT\\Arquitetura e Organização de Computadores" +
-            "\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
-
+    public static final String caminho = "D:\\Projetos\\BachelorDegreeIT\\Arquitetura e Organização de Computadores\\projeto e arquivos para o problema da senha\\senha\\arquivosTP";
     private final int min;
     private final int max;
 
@@ -58,6 +55,7 @@ public class TesteAbrirFilePassword extends Thread{
                 File file = new File(caminho+"\\"+nomeArquivo+"\\"+nomeArquivo+"Senha.txt");
                 PrintStream ps = new PrintStream(file);
                 ps.println(senha);
+                ps.println(System.currentTimeMillis()- tempoI);
                 ps.close();
                 return true;
             }
@@ -80,18 +78,17 @@ public class TesteAbrirFilePassword extends Thread{
         int posicao1 = 0;
         int posicao2 = 0;
         int tamanho = 3;
-
-
         char[] senha = new char[tamanho];
-        for(int ascii2 = min; ascii2 <= max; ascii2++){
-            for(int ascii1 = 32; ascii1 <= 127; ascii1++){
+        for(int ascii2 = min-1; ascii2 <= max; ascii2++){
+            System.out.println(ascii2);
+            for(int ascii1 = 31; ascii1 <= 126; ascii1++){
                 for (int ascii0 = 32; ascii0 <= 126; ascii0++) {
 
                     senha[posicao0] = (char)ascii0;
                     if(testaSenha(String.valueOf(senha,0,posicao0+1))){
                         senhaDescoberta.set(true);
                         Main.tempoF = System.currentTimeMillis();
-                        System.out.println(Main.tempoF-Main.tempoI);
+                        System.out.println(Main.tempoF- tempoI);
                         return;
                     }else{
                         if(getSenhaDescoberta()){
@@ -99,13 +96,14 @@ public class TesteAbrirFilePassword extends Thread{
                             ascii1 = 128;
                             ascii0 = 127;
                         }
-                        System.out.print("["+String.valueOf((senha),0,(posicao0+1))+"] ");
+                        if(ascii2==111){
+                            System.out.print("["+String.valueOf((senha),0,(posicao0+1))+"] ");
+                        }
                     }
                 }
                 senha[posicao1] = (char)ascii1;
                 posicao0 = posicao1 + 1;
             }
-
             posicao1 = 1;
             senha[posicao2] = (char)ascii2;
         }
@@ -194,7 +192,7 @@ class Main{
             TesteAbrirFilePassword.senhaDescoberta.set(false);
         }
         //TODO Abrir, gerenciar a pasta final e mostrar a senha
-        arquivos = new File[4];
+        arquivos = new File[contadorZips];
         for(int i = 0; i < arquivos.length; i++){
             int j = i+1;
             arquivos[i] = new File(caminho+"\\doc"+j+"\\doc"+j+"Senha.txt");
@@ -231,6 +229,8 @@ class Main{
                     File file = new File(caminho+"\\Final\\FinalSenha.txt");
                     PrintStream ps = new PrintStream(file);
                     ps.println(ultimaSenha);
+                    MainSequencial.tempoF = System.currentTimeMillis();
+                    ps.println(MainSequencial.tempoF-MainSequencial.tempoI);
                     ps.close();
                 }
             }
