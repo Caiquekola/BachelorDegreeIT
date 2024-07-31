@@ -26,3 +26,8 @@ SELECT * FROM ifmg.inscritos;
 INSERT INTO inscritos (email) VALUES ('kola@gmail.com');
 
 INSERT IGNORE INTO inscritos (email) VALUES ('kola@gmail.com'),('alexya@gmail.com');
+
+
+alter table table_name add table_column definitions/types first|after column_name;
+
+
