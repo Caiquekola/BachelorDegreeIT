@@ -30,3 +30,9 @@ ALTER TABLE ifmg.pessoa DROP COLUMN profissao;
 ALTER TABLE ifmg.pessoa ADD profissao VARCHAR(10) FIRST;
 
 ALTER TABLE ifmg.pessoa ADD profissao VARCHAR(10) AFTER nome;
+
+ALTER TABLE ifmg.pessoa MODIFY profissao VARCHAR(20);
+
+ALTER TABLE ifmg.pessoa CHANGE profissao prof VARCHAR(30) AFTER nome;
+
+ALTER TABLE ifmg.pessoa RENAME TO pessoas;
