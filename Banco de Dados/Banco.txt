@@ -2,6 +2,10 @@ INSERT INTO pessoa (nome) VALUES ("Caique");
 
 DELETE FROM pessoa WHERE nome = 'Caique';
 
+use TABLE;
+
+description name_table;
+
 SELECT * FROM pessoa;
 
 DESC pessoa;
