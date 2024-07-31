@@ -2,10 +2,6 @@ INSERT INTO pessoa (nome) VALUES ("Caique");
 
 DELETE FROM pessoa WHERE nome = 'Caique';
 
-use TABLE;
-
-description name_table;
-
 SELECT * FROM pessoa;
 
 DESC pessoa;
@@ -27,7 +23,10 @@ INSERT INTO inscritos (email) VALUES ('kola@gmail.com');
 
 INSERT IGNORE INTO inscritos (email) VALUES ('kola@gmail.com'),('alexya@gmail.com');
 
+ALTER TABLE ifmg.pessoa ADD profissao VARCHAR(10);
 
-alter table table_name add table_column definitions/types first|after column_name;
+ALTER TABLE ifmg.pessoa DROP COLUMN profissao;
 
+ALTER TABLE ifmg.pessoa ADD profissao VARCHAR(10) FIRST;
 
+ALTER TABLE ifmg.pessoa ADD profissao VARCHAR(10) AFTER nome;
