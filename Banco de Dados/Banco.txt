@@ -1,0 +1,24 @@
+INSERT INTO pessoa (nome) VALUES ("Caique");
+
+DELETE FROM pessoa WHERE nome = 'Caique';
+
+SELECT * FROM pessoa;
+
+DESC pessoa;
+
+SHOW TABLES;
+
+SHOW DATABASES;
+
+-- unsigned, not null, unique, auto_increment, default
+
+CREATE TABLE ifmg.inscritos (
+	id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(130) NOT NULL UNIQUE
+);
+
+SELECT * FROM ifmg.inscritos;
+
+INSERT INTO inscritos (email) VALUES ('kola@gmail.com');
+
+INSERT IGNORE INTO inscritos (email) VALUES ('kola@gmail.com'),('alexya@gmail.com');
