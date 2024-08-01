@@ -4,6 +4,8 @@ import com.caiquekola.todosimple.models.Task;
 import com.caiquekola.todosimple.models.User;
 import com.caiquekola.todosimple.repositories.TaskRepository;
 import com.caiquekola.todosimple.repositories.UserRepository;
+import com.caiquekola.todosimple.services.exceptions.DataBindindViolationException;
+import com.caiquekola.todosimple.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +24,7 @@ public class TaskService {
 
     public Task findById(Long id){
         Optional<Task> task = this.taskRepository.findById(id);
-        return task.orElseThrow(()-> new RuntimeException("Não foram encontrados usuários" +
+        return task.orElseThrow(()-> new ObjectNotFoundException("Não foram encontrados usuários" +
                 "com esse ID!"));
     }
 
@@ -52,7 +54,7 @@ public class TaskService {
         try{
             this.taskRepository.delete(task);
         } catch (Exception E){
-            throw new RuntimeException("Erro de deleção");
+            throw new DataBindindViolationException("Erro de deleção");
         }
     }
 }

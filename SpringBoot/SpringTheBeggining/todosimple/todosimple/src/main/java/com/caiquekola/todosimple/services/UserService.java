@@ -3,6 +3,8 @@ package com.caiquekola.todosimple.services;
 import com.caiquekola.todosimple.models.User;
 import com.caiquekola.todosimple.repositories.TaskRepository;
 import com.caiquekola.todosimple.repositories.UserRepository;
+import com.caiquekola.todosimple.services.exceptions.DataBindindViolationException;
+import com.caiquekola.todosimple.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +21,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = this.userRepository.findById(id);
-        return user.orElseThrow(() -> new RuntimeException("User not found"));
+        return user.orElseThrow(() -> new ObjectNotFoundException("User not found"));
     }
 
     //Sempre que fizer um create/update utilize um Transactional - Uma arquitetura para atomicidade
@@ -47,7 +49,7 @@ public class UserService {
             this.userRepository.delete(user);
         } catch (Exception e){
             //Possivel erro de um usuário que possua relacionamentos com outras entidades
-            throw new RuntimeException(e+ "Error in deleting user");
+            throw new DataBindindViolationException(e+ "Error in deleting user");
         }
 
 
