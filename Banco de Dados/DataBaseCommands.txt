@@ -1,0 +1,38 @@
+INSERT INTO pessoa (nome) VALUES ("Caique");
+
+DELETE FROM pessoa WHERE nome = 'Caique';
+
+SELECT * FROM pessoa;
+
+DESC pessoa;
+
+SHOW TABLES;
+
+SHOW DATABASES;
+
+-- unsigned, not null, unique, auto_increment, default
+
+CREATE TABLE ifmg.inscritos (
+	id INTEGER PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(130) NOT NULL UNIQUE
+);
+
+SELECT * FROM ifmg.inscritos;
+
+INSERT INTO inscritos (email) VALUES ('kola@gmail.com');
+
+INSERT IGNORE INTO inscritos (email) VALUES ('kola@gmail.com'),('alexya@gmail.com');
+
+ALTER TABLE ifmg.pessoa ADD profissao VARCHAR(10);
+
+ALTER TABLE ifmg.pessoa DROP COLUMN profissao;
+
+ALTER TABLE ifmg.pessoa ADD profissao VARCHAR(10) FIRST;
+
+ALTER TABLE ifmg.pessoa ADD profissao VARCHAR(10) AFTER nome;
+
+ALTER TABLE ifmg.pessoa MODIFY profissao VARCHAR(20);
+
+ALTER TABLE ifmg.pessoa CHANGE profissao prof VARCHAR(30) AFTER nome;
+
+ALTER TABLE ifmg.pessoa RENAME TO pessoas;
