@@ -16,6 +16,8 @@
 	#Tamanho do quadrado para t0
 	move $t0, $v0
 	
+	beq $t0, $zero, saida
+	
 	#Iniciando as impressões das linhas
 	li $t1, 0
 
@@ -31,7 +33,7 @@ simbolos:
 	#Incremente a coluna
 	addi $t2, $t2, 1
 	
-	#Testa o N testes
+	#Testa o N testes para coluna
 	blt $t2, $t0, simbolos
 	
 	
@@ -46,3 +48,5 @@ simbolos:
 	
 	#Testa o N testes
 	blt $t1, $t0, linha
+	
+saida:
