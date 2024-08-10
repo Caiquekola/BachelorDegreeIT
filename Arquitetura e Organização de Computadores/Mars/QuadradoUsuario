@@ -1,0 +1,12 @@
+.data
+	mensg1: .asciiz "Informe o tamanho:"
+	ast: .asciiz "* "
+	qLinha: .asciiz "\n"
+	
+.text
+	#Leitura do tamanho do quadrado
+	li $v0, 4
+	la $a0, mesn1
+	syscall
+	
+	
