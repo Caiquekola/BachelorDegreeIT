@@ -1,0 +1,28 @@
+.data
+	vet: .byte 7,3,5,10,12
+.text
+	la $t0, vet #carrego o endereco do array
+	addi $t1, $t0,  5 #carrego o ULTIMO endereco de memoria do array
+	
+	#contador
+	li $t3, 0
+imprime: 
+	li $v0, 1
+	lb $a0, ($t0)
+	syscall
+	
+	lb $t4, ($t0)
+	add $t3, $t3, $t4
+	
+	sb $t3, ($t0)
+	
+	addi $t0, $t0, 1
+	
+	blt $t0, $t1, imprime
+	
+	li $v0, 2
+	lw $a0, ($t3)
+	syscall
+	
+	
+	
