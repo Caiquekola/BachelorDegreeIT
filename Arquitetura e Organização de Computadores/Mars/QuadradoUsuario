@@ -6,7 +6,43 @@
 .text
 	#Leitura do tamanho do quadrado
 	li $v0, 4
-	la $a0, mesn1
+	la $a0, mensg1
 	syscall
 	
+	#leitura de dados do usuário
+	li $v0, 5
+	syscall
 	
+	#Tamanho do quadrado para t0
+	move $t0, $v0
+	
+	#Iniciando as impressões das linhas
+	li $t1, 0
+
+linha:
+	li $t2, 0
+#Colunas
+simbolos:
+	#Um asteristico
+	li $v0, 4
+	la $a0, ast
+	syscall
+	
+	#Incremente a coluna
+	addi $t2, $t2, 1
+	
+	#Testa o N testes
+	blt $t2, $t0, simbolos
+	
+	
+	
+	#Quebra de linha
+	li $v0, 4
+	la $a0, qLinha
+	syscall
+	
+	#Incremente
+	addi $t1, $t1, 1
+	
+	#Testa o N testes
+	blt $t1, $t0, linha
