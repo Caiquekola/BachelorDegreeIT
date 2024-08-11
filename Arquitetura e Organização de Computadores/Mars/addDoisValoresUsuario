@@ -1,0 +1,23 @@
+.data
+	mensg1: .asciiz "Digite dois valores: "
+.text
+	#exibindo mensagem STRING
+	li $v0, 4
+	la $a0, mensg1
+	syscall 
+	#leitura valor
+	li $v0, 5
+	syscall
+	move $t1, $v0
+	li $v0, 5
+	syscall
+	move $t2, $v0
+	add $t0, $t1, $t2
+	
+	#imprimindo o resultado
+	li $v0, 1
+	move $a0, $t0
+
+	syscall
+	
+	

@@ -1,0 +1,9 @@
+.data
+
+.text
+
+	li $t0, 4
+	move $t2, $t0
+	
+	
+	

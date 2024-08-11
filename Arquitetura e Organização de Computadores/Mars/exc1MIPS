@@ -1,0 +1,22 @@
+.data
+
+.text
+	#Leitura de um valor inteiro do terminal
+	li $v0, 5
+	move $t0, $v0
+	
+	#multiplo de 11 ou de 4
+	rem $t3, $t0, 11	
+	bgt 
+	rem $t4, $t0, 4
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
