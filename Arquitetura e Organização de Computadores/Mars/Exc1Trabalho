@@ -1,0 +1,136 @@
+.data
+
+	array4: .byte  
+	mensg1: .asciiz "Informe a idade homem1: "
+	mensg2: .asciiz "Informe a idade homem2: "
+	mensg3: .asciiz "Informe a idade mulher1: "
+	mensg4: .asciiz "Informe a idade mulher2: "
+	mensgFim: .asciiz "Soma das idades HVelho, MNova: "
+	mensgFim2: .asciiz "Produto das idades HNovo, MVelha: "
+	qLinha: .asciiz "\n"
+	
+	
+	#Imprima a soma da idade do homem mais velho com a mulher mais nova
+	#Imprimir o produto da idade do homem mais novo com a mulher mais velha
+.text
+	#carrego o endereco do array
+	
+	
+	#Exibição frase 1° idade:
+	li $v0, 4
+	la $a0, mensg1
+	syscall
+	
+	#Leitura primeira idade
+	li $v0, 5
+	syscall
+	#movo a idade para t0
+	move $t0, $v0
+	
+	
+	#Exibição frase 2° idade:
+	li $v0, 4
+	la $a0, mensg2
+	syscall
+	
+	#Leitura segunda idade
+	li $v0, 5
+	syscall
+	#movo a idade para t1
+	move $t1, $v0
+	
+	
+	
+	#Exibição frase 3° idade:
+	li $v0, 4
+	la $a0, mensg3
+	syscall
+	
+	#Leitura terceira idade
+	li $v0, 5
+	syscall
+	#movo a idade para t2
+	move $t2, $v0
+	
+	
+	#Exibição frase 4° idade:
+	li $v0, 4
+	la $a0, mensg4
+	syscall
+	
+	#Leitura quarta idade
+	li $v0, 5
+	syscall
+	#movo a idade para t3
+	move $t3, $v0
+	
+	#----------------------------------------------------
+	#ex : 1  2  3  4
+	#ex : 2  1  3  4
+	#ex : 1  2  4  3
+	#ex : 2  1  4  3
+	#   : t0 t1 t2 t3
+	
+	#Neste caso se o homem 2 ($t1) for menor que homem 1 ($t0) então pule para h1Maiorh2
+	blt $t1, $t0, h1Maiorh2
+	
+	#Caso falso acima
+	#Testo qual mulher é a mais velha
+	
+	blt $t3, $t2, m1Maiorm2Con
+	
+	#Ambos falsos
+	#Mais velho $t0, mais novo $t1
+	#Mais velha $t3, mais nova $t2
+	add $t4, $t0, $t2
+	mul $t5, $t1, $t3
+	j fim
+	
+m1Maiorm2Con:
+	#Mais velho $t1, mais novo $t0
+	#Mais velha $t2, mais nova $t3
+	add $t4, $t1, $t3
+	mul $t5, $t0, $t2
+	j fim
+	
+h1Maiorh2:
+	#Mais velho $t0, mais novo $t1
+	#Neste caso se a mulher 2 for menor que mulher 1 então pule para m1Maiorm2
+	blt $t3, $t2, m1Maiorm2
+	#Caso contrário
+	#Mais velho $t0, mais novo $t1
+	#Mais velha $t3, mais nova $t2
+	add $t4, $t0, $t2
+	mul $t5, $t3, $t1
+	j fim
+	
+m1Maiorm2:
+	#Mais velho $t0, mais novo $t1
+	#Mais velha $t2, mais nova $t3
+	add $t4, $t0, $t3
+	mul $t5, $t1, $t2
+	
+fim:
+	#Exibição frase ninal:
+	li $v0, 4
+	la $a0, mensgFim
+	syscall
+	#Exibição frase ninal:
+	li $v0, 1
+	la $a0, ($t4)
+	syscall
+	#Quebra de linha
+	li $v0, 4
+	la $a0, qLinha
+	syscall
+	
+	#Exibição frase ninal:
+	li $v0, 4
+	la $a0, mensgFim2
+	syscall
+	
+	
+	#Exibição frase ninal:
+	li $v0, 1
+	la $a0, ($t5)
+	syscall
