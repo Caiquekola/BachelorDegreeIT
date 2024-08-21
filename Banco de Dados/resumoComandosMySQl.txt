@@ -1,0 +1,115 @@
+create database <nome_banco>;
+use <nome_banco>;
+
+create table <nome_tabela> (campos tipo_domínio restrições);
+drop table <nome_tabela>
+--Alterar estrutura da tabela
+alter table add column <nome_coluna tipo domínio>
+		drop column <nome_coluna>
+		modify column <novo_dominio>
+		change column <coluna_antiga coluna_nova>
+		rename to <novo_nome>
+		add foreign key <nome_coluna> references <tabela> <coluna>
+
+--Inserção dados
+	insert into <nome_tabela> (<lista_coluna>) values (<lista_valores>)
+--Alterar dados
+	update <nome_tabela> set <alteracao> where <condicao>
+--Apagar dados
+	delete from <nome_tabela> where <condicao>
+--Selecionar dados
+	select <lista_decolunas> from <lista_tabelas> where <condições>
+	... where <nomeColumn> LIKE '0%'
+	-- O % indica que qualquer conteúdo pode estar nessa condição
+	-- chama-se caracter coringa
+	-- ex: LIKE '%novo%'
+	... order by <lista_colunas> ASC/DESC
+	
+
+	--IN AND BETWEEN
+	IN : Faz a comparação de um valor contra um conjunto fixo ou até mesmo comuma subquery. 
+
+	BETWEEN : Compara um valor entre um intervalo de exatamente dois valores.
+	WHERE YEAR(*) BETWEEN <ano> and <ano>
+	range - intervalo
+
+
+	--Distinct, Diferenciar os conteúdos, sem repetição
+	select distinct()
+
+	--ALIAS, podemos utilizar o "as" para substituir o nome de uma seleção e de uma tabela
+	ex: SELECT DISTINCT ( ) as "Novo_Nome" FROM ...
+	ex: select a.nome, a.cursopreferido, c.nome, c.ano from aluno as a inner join curso as c on a.cursopreferido = c.idcurso;
+
+-- Funções agregação
+	Count - numero de registros
+		select count(nome_coluna) from tabela
+	
+	Max   - maior valor
+		select max () as '' from ...
+	Min   - menor valor
+		select min() as '' from ...
+	Sum   - somar valores númericos
+		select sum() from ...
+	Avg   - calcular a média dos valores númericos
+		select avg() ...
+
+	-- select nome from curso where carga > (select avg(carga) from curso);
+
+
+
+-- Year, month, day
+	Separar a data em partes
+	Day(date), Month(date), Year(date)
+	Year(Current_Date())
+
+-- SubConsulta
+	Passa-se a consulta mais interna para a mais externa
+
+	ex1: SELECT coluna(s) FROM tabela(s) WHERE coluna operador (SELECT coluna FROM tabela WHERE condições);
+	pode ser: >, <, >= ,<=, =, <>, IN, NOT, AND, OR, etc
+
+	ex2: SELECT X, Y FROM TabelaA WHERE Y in (1,2) // y = 1 and y = 2
+	     SELECT X, Y FROM TabelaA WHERE Y in (SELECT Y FROM TABELA B)
+
+-- Limit 
+	Limitar o número de linhas exibidas
+	Select <campos> From<tabela> Limit 4;
+
+
+-- Agrupamento e Agregando
+	SELECT X, sum(Y) FROM TabelaA Group by X Having sum (Y)>= 6
+
+--Junções
+	Produto cartesiano, interna, externa
+	Join, junção cartesiana, todos os dados de ambas as tabelas e ocorre repetição
+
+	select <column> <column2> ... from <tabela> join <a_table>
+
+	Junção Interna (INNER JOIN)
+	  Apenas correspondências que existem em ambas as tabelas
+	  ex: SELECT e.nome , d.hobby FROM tabela_Esquerda as e INNER JOIN tabela_Direita as d on e. idHobby = d.id;
+
+***     Junção Cartesiana
+		select aluno.nome, aluno.cursopreferido, curso.nome from aluno ,curso where aluno.cursopreferido = curso.idCurso;
+	
+	Junção Externa - (LEFT JOIN, RIGHT JOIN)
+	Adiciona os elementos exclusivos e aqueles que não há registros do outro lado aparecem null
+
+	  select a.nome, c.nome, c.ano from aluno as a left join curso as c on a.cursopreferido = c.idcurso;
+	
+	(FULL JOIN) no mySql é Union do left com right
+	
+	select a.nome, c.nome, c.ano from
+	aluno as a left join curso as c
+	on a.cursopreferido = c.idcurso
+	UNION
+	select a.nome, c.nome, c.ano from
+	aluno as a right join curso as c
+	on a.cursopreferido = c.idcurso;
+
+
+Exercícios aula 13, 14, 17
+
+
+	
