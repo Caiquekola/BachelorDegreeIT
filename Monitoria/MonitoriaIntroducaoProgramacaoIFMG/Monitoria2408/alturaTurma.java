@@ -5,8 +5,10 @@ public class alturaTurma {
 
         int codigo = 0;
         double altura = 0;
-        
+
         Scanner teclado = new Scanner(System.in);
+
+        // short byte int long  float double
 
         double maiorAltura = 0, menorAltura = 3, somaAlturas = 0,
                 somaAlturasMulheres = 0;
@@ -25,13 +27,14 @@ public class alturaTurma {
                 menorAltura = altura;
             }
             if(codigo == 2){
-                somaAlturasMulheres++;
-                qntMulheres++;
+                somaAlturasMulheres += altura;
+                qntMulheres ++;
             }
+
 
         }
 
-        //Saida, Exibição
+        //Saida, Exibição, Impressão
         double mediaAlturas = somaAlturas / 50;
         double mediaAlturasMulheres = somaAlturasMulheres / qntMulheres;
 
