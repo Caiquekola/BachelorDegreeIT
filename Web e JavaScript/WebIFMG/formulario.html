@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+</head>
+<body>
+    <form name="form" method="get" onsubmit="alert('Hello')" target="_parent" >
+        Nickname <input type="text" minlength="4"><br>
+        Idade <input type="number" maxlength="99" min="12"><br>
+        Senha <input type="password" minlength="8"> <br>
+        Data: <input type="date"><br>
+        CheckBox  <input type="checkbox" name="cb" id="cb">
+        <input type="checkbox" name="cb2" id="cb2"><br>
+        <label>Radio:</label><input type="radio" min="0" max="100" name="ace" multiple="1"> <input type="radio" name="ace" min="0" max="100" multiple="1"><br>
+        File: <input type="file" name="file" id="file" multiple>
+
+        <select name="role" id="">
+            <option value=""> Selecione o cargo</option>
+            <option value="diretor"></option>
+        </select>
+
+        <button type="submit" >Enviar</button>
+    </form>
+</body>
+</html>
