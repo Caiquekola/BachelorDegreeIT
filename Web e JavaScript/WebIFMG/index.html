@@ -3,9 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Primeiro Site Web</title>
+    <title>SORVETERIA IFMG</title>
 </head>
+<style>
+    *{
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>
 <body>
-    
+    <h1>
+        Sorveteria IFMG <hr>
+    </h1>
+
+
+    <table   border='5px' style="text-align: center;" title="Sorvetes">
+        <caption>
+            Menu de Sabores
+        </caption>
+        <thead'> 
+            <tr>
+                <th>Nome</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Morango</td>
+                <td>R$2,00</td>
+            </tr>
+            <tr>
+                <td>Chocolate</td>
+                <td>R$2,50</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <img src="https://media-cdn.tripadvisor.com/media/photo-s/23/2a/f1/bc/caption.jpg" alt="Sorveteria img" srcset="">
+    <h3> Escolha seu sabor:</h3>
+
+    <form action="" method="get">
+        <input type="radio" name="sabor" id="m" value="morango" required > Morango <br>
+        <input type="radio" name="sabor" id="c" value="Chocolate"> Chocolate <br>
+        <select  name="sabores" id="" required>
+            <option value="">Selecione o sabor</option>
+            <option value="morango" >Morango</option>
+            <option value="chocolate">Chocolate</option>
+        
+
+        </select>
+        <br>
+        <input type="text" name="endereço" min="5" minlength="5" required placeholder="Digite seu endereço">
+        <button type="submit">Enviar</button><br>
+    </form>
+    <hr>
+    <table border="1" >
+        <caption>Semana</caption>
+        <thead>
+            <tr>
+                <td></td>
+                <th scope="col">Domingo</th>
+                <th scope="col">Segunda</th>
+                <th scope="col">Terça</th>
+                <th scope="col">Quarta</th>
+                <th scope="col">Quinta</th>
+                <th scope="col">Sexta</th>
+                <th scope="col">Sabado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">07:00</th>
+                <td>Acordar</td>
+                <td>Acordar</td>
+                <td>Acordar</td>
+                <td>Acordar</td>
+                <td>Acordar</td>
+                <td>Acordar</td>
+                <td>Acordar</td>
+            </tr>
+            <tr>
+                <th scope="row">08:00</th>
+                <td>Estudos</td>
+                <td>Estudos</td>
+                <td>Estudos</td>
+                <td>Estudos</td>
+                <td>Estudos</td>
+                <td>Estudos</td>
+                <td>Estudos</td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>
