@@ -1,0 +1,160 @@
+*{
+    font-family: "Poppins",Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;   
+}
+
+.credits{
+    color: white;
+    text-align: center;
+}
+
+body{
+    background: #001219;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container{
+    background-color: #005f73;
+    border-radius: 14px;
+    margin: 14px;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: 0 3px 5px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.title{
+    background: linear-gradient(20deg, #0a9396 0%, #94d2bd 100%);
+    padding: 1.5rem;
+    text-align: center;
+    color: #fff;
+    font-size: 2rem;
+}
+
+.form-content{
+    margin-bottom: 8px;
+    padding-bottom: 18px;
+    position: relative;
+}
+
+.numeros{
+    display:flex;
+    justify-content:space-around;
+    
+}
+
+
+.form-content.error a{
+    color: #ff3b25;
+    visibility: visible;
+
+}
+
+.form{
+    padding: 2rem;
+    
+}
+
+.form-content label{
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+.form-content input{
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    padding: 8px;
+    border: 2px solid #dfdfdf;
+
+}
+
+.form-content a{
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    visibility: hidden;
+}
+
+.form button{
+    background-color: #0a9396 ;
+    color: #fff;
+    width: 100%;
+    border-radius: 1rem;
+    padding: 10px;
+    border: 0;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 14px;
+}
+
+.concatenate{
+    background: linear-gradient(20deg, #0a9396 0%, #94d2bd 100%);
+    background-color: #0a9396 ;
+    color: #ffffff;
+    width: 100%;
+    border-radius: 1rem;
+    padding: 10px;
+    border: 0;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 14px;
+    text-align: center;
+    visibility:visible;
+    display: flex;
+    justify-content: center;
+}
+
+.concatenate.error{
+    visibility: hidden;
+    display: none;
+}
+
+
+
+
+.sum.error{
+    visibility: hidden;
+    display: none;
+}
+
+.sum{
+    justify-content: center;
+    text-align: center;
+    background-color: #0a9396 ;
+    color: #fff;
+    width: 100%;
+    border-radius: 1rem;
+    padding: 10px;
+    border: 0;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 14px;
+    visibility: visible;
+}
+
+.form-content.error input{
+    border-color: #ff3b25;
+    visibility: visible;
+
+}
+
+.form-content.error a{
+    color: #ff3b25;
+    visibility: visible;
+
+}
+
+.numeros .form-content a{
+    position: absolute;
+    margin-top: 20px;
+    left: 0;
+    top: 50px;
+    font-size: 13px;
+}
