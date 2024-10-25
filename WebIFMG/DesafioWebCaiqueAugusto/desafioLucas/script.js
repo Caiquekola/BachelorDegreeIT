@@ -5,6 +5,7 @@ const number1 = document.getElementById("number1");
 const number2 = document.getElementById("number2");
 const concatenatePhrase = document.getElementById("concatenate");
 const sum = document.getElementById("sum");
+let fundo = 1;
 
 function concatenate(){
     checkConcatenate();
@@ -61,7 +62,16 @@ function checkInputAge(){
     }
 }
 
-
+function changeColor(){
+    if(fundo==1){
+        fundo--;
+        document.body.style.background = 'linear-gradient(20deg, #001219 0%, #0f5453 100%)';
+        
+    }else{
+        fundo++;
+        document.body.style.background = 'linear-gradient(20deg, #0f5453 0%, #001219 100%)';
+    }
+}
 
 function checkConcatenate(){
     checkInputUsername();
