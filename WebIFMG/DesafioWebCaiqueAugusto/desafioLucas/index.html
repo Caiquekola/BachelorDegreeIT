@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafio Lucas</title>
 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -22,8 +27,8 @@
             <h2> Desafio Lucas</h2>
         </section>
 
-        <p class="concatenate error" id="concatenate" ></p>
-        <p class="sum error" id="sum" ></p>
+        <p class="concatenate error" id="concatenate"></p>
+        <p class="sum error" id="sum"></p>
 
         <form action="" class="form" id="form">
             <div class="info">
@@ -33,38 +38,53 @@
                         autofocus>
                     <a>Mensagem erro</a>
                 </div>
-    
+
                 <div class="form-content">
                     <label for="age">Idade</label>
                     <input type="number" id="age" alt="idade" placeholder="Digite a sua idade..." autofocus>
                     <a>Mensagem erro</a>
                 </div>
             </div>
-           
+
 
             <div class="numeros">
                 <div class="form-content numbers">
                     <label for="number1">Número 1</label>
-                    <input type="number" id="number1" alt="Primeiro número" placeholder="Digite o 1° número..." autofocus>
+                    <input type="number" id="number1" alt="Primeiro número" placeholder="Digite o 1° número..."
+                        autofocus>
                     <a>Mensagem erro</a>
                 </div>
                 <div class="form-content numbers">
                     <label for="number2">Número 2</label>
-                    <input type="number" id="number2" alt="Segundo número" placeholder="Digite o 2° número..." autofocus>
+                    <input type="number" id="number2" alt="Segundo número" placeholder="Digite o 2° número..."
+                        autofocus>
                     <a>Mensagem erro</a>
                 </div>
-                
 
-                
+
+
             </div>
 
+            <div class="buttons">
+                <div class="change">
+                    <i class="fa-solid fa-plus"></i>
+                    <button type="button" onclick="concatenate()">Concatenar</button>
+                </div>
+                <div class="change">
+                    <i class="fa-solid fa-calculator"></i>
+                    <button type="button" onclick="sumNumbers()">Somar</button>
 
-            <button type="button" onclick="concatenate()">Concatenar</button>
-            <button type="button" onclick="sumNumbers()">Somar</button>
-            <button type="button" onclick="changeColor()">Alterar cor fundo</button>
+                </div>
+                <div class="change">
+                    <i class="fa-solid fa-palette"></i>
+                    <button type="button" onclick="changeColor()">Alterar cor fundo</button>
+
+                </div>
+            </div>
+
         </form>
 
-        
+
         <p class="credits">All rights reserved for Caiquekola ©️ - October/2024</p>
     </div>
 
