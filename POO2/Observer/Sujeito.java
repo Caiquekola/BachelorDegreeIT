@@ -62,3 +62,46 @@ class Bolsa implements Sujeito {
     }
 
 }
+
+class Investidor implements Observador {
+    private int pApple, pIntel, pGoogle, pIbm, IDObservador;
+    private static int contador;
+    private Sujeito bolsa;
+
+    public Investidor(Sujeito bolsa) {
+        this.bolsa = bolsa;
+        this.IDObservador=++contador;
+        System.out.println("Novo observador registrado: "+this.IDObservador);
+        bolsa.registra(this);
+    }
+
+    public void exibirPrecos(){
+        System.out.println("Observador"+this.IDObservador);
+    }
+
+    public void atualiza(int pApple, int pIntel,int pGoogle,int pIbm){
+        this.pIbm=pIbm;
+        this.pApple=pApple;
+        this.pIntel=pIntel;
+        this.pGoogle=pGoogle;
+        exibirPrecos();
+    }
+}
+
+ class Principal{
+    public static void main(String[] args) {
+        Bolsa b1 = new Bolsa();
+
+        Investidor i1 = new Investidor(b1);
+        Investidor i2 = new Investidor(b1);
+        Investidor i3 = new Investidor(b1);
+        Investidor i4 = new Investidor(b1);
+        Investidor i5 = new Investidor(b1);
+
+        b1.setPrecoApple(100);
+        b1.setPrecoGoogle(800);
+        b1.setPrecoIBM(300);
+        b1.setPrecoIntel(250);
+
+    }
+}
