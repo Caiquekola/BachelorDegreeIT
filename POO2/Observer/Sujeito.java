@@ -47,18 +47,25 @@ class Bolsa implements Sujeito {
 
     public void setPrecoIBM(int novoPreco) {
         this.pIbm = novoPreco;
+        notificar();
     }
 
     public void setPrecoIntel(int novoPreco) {
         this.pIntel = novoPreco;
+        notificar();
+
     }
 
     public void setPrecoApple(int novoPreco) {
         this.pApple = novoPreco;
+        notificar();
+
     }
 
     public void setPrecoGoogle(int novoPreco) {
         this.pGoogle = novoPreco;
+        notificar();
+
     }
 
 }
@@ -76,7 +83,7 @@ class Investidor implements Observador {
     }
 
     public void exibirPrecos(){
-        System.out.println("Observador"+this.IDObservador);
+        System.out.println("Observador"+this.IDObservador+" IBM: "+pIbm+"Intel: "+pIntel+" Google: "+pGoogle+"Apple: "+pApple);
     }
 
     public void atualiza(int pApple, int pIntel,int pGoogle,int pIbm){
@@ -97,6 +104,7 @@ class Investidor implements Observador {
         Investidor i3 = new Investidor(b1);
         Investidor i4 = new Investidor(b1);
         Investidor i5 = new Investidor(b1);
+
 
         b1.setPrecoApple(100);
         b1.setPrecoGoogle(800);
