@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse</title>
+</head>
+<body>
+    <button id="btnHover">Passa o mouse aqui</button>
+
+    <br>
+
+    <input type="text" id="inputText" placeholder="Pressione qualquer tecla...">
+
+
+    <script>
+        document.getElementById("btnHover").addEventListener("mouseenter", function(){
+            this.style.backgroundColor = "green";
+            this.style.scale(2);
+        })
+        document.getElementById("btnHover").addEventListener("mouseleave", function(){
+            this.style.backgroundColor = "";
+            
+        })
+
+
+        document.getElementById("inputText").addEventListener("keydown",function(event){
+            console.log("Tecla pressionada "+event.key)
+        })
+    </script>
+</body>
+</html>

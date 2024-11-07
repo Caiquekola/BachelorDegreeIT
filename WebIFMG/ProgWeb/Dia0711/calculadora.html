@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+
+        .calculadora {
+            display: grid;
+            grid-template-columns: repeat(4, 80px); /* 4 colunas */
+            gap: 10px;
+        }
+
+        #display {
+            grid-column: span 4;
+            background: #111;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 1.5em;
+            text-align: right;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            width: 80px;
+            height: 50px;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .btn:before {
+            content: '';
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .btn:active {
+            color: #000;
+        }
+
+        .btn:active:after {
+            background: transparent;
+        }
+
+        .btn:hover:before {
+            opacity: 1;
+        }
+
+        .btn:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+    </style>
+</head>
+<body>
+    <section class="calculadora">
+        <p id="display">0</p>
+        <button class="btn" data-value="1">1</button>
+        <button class="btn" data-value="2">2</button>
+        <button class="btn" data-value="3">3</button>
+        <button class="btn" data-value="+">+</button>
+        <button class="btn" data-value="4">4</button>
+        <button class="btn" data-value="5">5</button>
+        <button class="btn" data-value="6">6</button>
+        <button class="btn" data-value="-">-</button>
+        <button class="btn" data-value="7">7</button>
+        <button class="btn" data-value="8">8</button>
+        <button class="btn" data-value="9">9</button>
+        <button class="btn" data-value="*">*</button>
+        <button class="btn" data-value="C">C</button>
+        <button class="btn" data-value="0">0</button>
+        <button class="btn" data-value="/">/</button>
+        <button class="btn" id="equals">=</button>
+    </section>
+
+    <script>
+        const display = document.getElementById("display");
+        const buttons = document.querySelectorAll(".btn");
+
+        // Evento de clique nos botões
+        buttons.forEach(button => {
+            button.addEventListener("click", function() {
+                const value = this.getAttribute("data-value");
+
+                if (value === "C") {
+                    display.textContent = "";
+                } else {
+                    display.textContent += value;
+                }
+            });
+
+            // Eventos de hover para mudança de cor
+            button.addEventListener("mouseenter", function() {
+                this.style.backgroundColor = "white";
+            });
+            button.addEventListener("mouseleave", function() {
+                this.style.backgroundColor = "#111";
+            });
+        });
+
+        // Evento de clique no "="
+        document.getElementById("equals").addEventListener("click", function() {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = "Erro";
+            }
+        });
+    </script>
+</body>
+</html>

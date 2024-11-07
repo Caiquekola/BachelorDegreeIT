@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício</title>
+</head>
+<body>
+    <form id="myForm">
+        <input type="text" id="name" placeholder="Digite seu nome">
+        <div id="nameError" style="color: red; display: none;">Nome é
+        obrigatório!</div>
+        <input type="email" id="email" placeholder="Digite seu e-mail">
+        <div id="emailError" style="color: red; display: none;">Por favor,
+        insira um e-mail válido!</div>
+        <button type="submit">Enviar</button>
+        </form>
+        <script>
+        const nameField = document.getElementById("name");
+        const emailField = document.getElementById("email");
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        // Evento de focus
+        nameField.addEventListener("focus", function() {
+        
+        this.style.backgroundColor = "lightyellow";
+        });
+        // Evento de blur
+        nameField.addEventListener("blur", function() {
+        this.style.backgroundColor = "";
+        });
+        // Evento de input
+        nameField.addEventListener("input", function() {
+        if (this.value.trim() === "") {
+        nameError.style.display = "block";
+        } else {
+        nameError.style.display = "none";
+        }
+        });
+        // Evento de submit
+        document.getElementById("myForm").addEventListener("submit",
+        function(event) {
+        event.preventDefault(); // Impede o envio do formulário
+        if (!emailField.value.includes("@")) {
+        emailError.style.display = "block";
+        } else {
+        emailError.style.display = "none";
+        alert("Formulário enviado com sucesso!");
+        }
+        });
+        </script>
+
+
+
+</body>
+</html>
