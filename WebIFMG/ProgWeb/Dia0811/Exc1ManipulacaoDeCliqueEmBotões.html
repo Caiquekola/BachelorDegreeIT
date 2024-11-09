@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 08/11</title>
+    <style>
+        @keyframes glowing {
+            0% {
+                background-position: 0 0;
+            }
+
+            50% {
+                background-position: 400% 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="font-size: 1rem;">Mudança dos botões com interação interna (html) e com javascript</h1>
+    <input type="button" onclick="this.value='Botão alterado'" value="Botão 1">
+    <input type="button" id="btn2" value="Botão 2">
+    <!--  -->
+    <h1 style="font-size: 1rem; padding-top: 2rem;">Interação com o Mouse (Eventos mouseover e mouseout)</h1>
+    <div id="exc2" onmouseover="changeStyle(this)" onmouseout="this.style.backgroundColor=''">
+        <p>
+            Objetivo: Explorar os eventos mouseover e mouseout, e entender como adicionar eventos
+            com e sem addEventListener.</p>
+    </div>
+
+
+
+    <script>
+        const btn2 = document.getElementById("btn2");
+        var contador = 4;
+        btn2.addEventListener("click", function () {
+            btn2.value = "Botão " + contador;
+            contador++;
+        });
+
+
+        function changeStyle() {
+            this.style.animation= 'glowing 20s linear infinite';
+            this.style.background= 'linear - gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000)';
+            this.style.background='size: 400 %';
+            this.style.transition= 'opacity .3s ease -in -out';
+
+        }
+    </script>
+</body>
+
+</html>
