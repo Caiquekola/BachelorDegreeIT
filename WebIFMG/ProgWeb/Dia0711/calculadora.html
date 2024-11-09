@@ -33,7 +33,7 @@
             margin-bottom: 10px;
         }
 
-        .btn {
+        button {
             width: 80px;
             height: 50px;
             border: none;
@@ -46,7 +46,7 @@
             border-radius: 10px;
         }
 
-        .btn:before {
+        button:before {
             content: '';
             background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
             position: absolute;
@@ -63,19 +63,19 @@
             border-radius: 10px;
         }
 
-        .btn:active {
+        button:active {
             color: #000;
         }
 
-        .btn:active:after {
+        button:active:after {
             background: transparent;
         }
 
-        .btn:hover:before {
+        button:hover:before {
             opacity: 1;
         }
 
-        .btn:after {
+        button:after {
             z-index: -1;
             content: '';
             position: absolute;
@@ -91,6 +91,11 @@
             0% { background-position: 0 0; }
             50% { background-position: 400% 0; }
             100% { background-position: 0 0; }
+        }
+
+        .equals{
+            grid-column: span 4;
+            width: 100%;
         }
     </style>
 </head>
@@ -112,18 +117,27 @@
         <button class="btn" data-value="C">C</button>
         <button class="btn" data-value="0">0</button>
         <button class="btn" data-value="/">/</button>
-        <button class="btn" id="equals">=</button>
+        <button class="btn" data-value=".">.</button>
+        <button class="equals" id="equals">=</button>
     </section>
 
     <script>
         const display = document.getElementById("display");
         const buttons = document.querySelectorAll(".btn");
 
+        let firsttime = true;
+        
+
         // Evento de clique nos botões
         buttons.forEach(button => {
             button.addEventListener("click", function() {
                 const value = this.getAttribute("data-value");
 
+                if(firsttime){
+                    display.textContent ="";
+                    display.textContent += value;
+                    firsttime = false;
+                }else 
                 if (value === "C") {
                     display.textContent = "";
                 } else {
@@ -142,10 +156,13 @@
 
         // Evento de clique no "="
         document.getElementById("equals").addEventListener("click", function() {
+            
             try {
-                display.value = eval(display.value);
+                display.textContent = eval(display.textContent);
+                console.log(display.textContent)
             } catch {
-                display.value = "Erro";
+                console.log(display.textContent)
+                display.textContent = "Erro";
             }
         });
     </script>
