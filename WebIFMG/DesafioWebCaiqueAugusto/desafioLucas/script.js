@@ -7,6 +7,16 @@ const concatenatePhrase = document.getElementById("concatenate");
 const sum = document.getElementById("sum");
 let fundo = 1;
 
+document.addEventListener('keypress', function(e){
+    if(e.which == 13){
+        concatenate();
+       changeColor();
+       sumNumbers();
+    }
+ }, false);
+
+
+
 function concatenate(){
     checkConcatenate();
 }
@@ -128,3 +138,18 @@ function errorInput(input,message){
 
     formItem.className = "form-content error";
 }
+
+const buttons = document.querySelectorAll(".buttons .change");
+
+buttons.forEach(button => {
+    const icon = button.querySelector("i");
+
+    button.querySelector("button").addEventListener('mouseover', () => {
+        icon.style.animationPlayState = "running";
+    });
+
+    button.querySelector("button").addEventListener('mouseout', () => {
+        icon.style.animationPlayState = "paused"; // Para a animação
+    });
+});
+
