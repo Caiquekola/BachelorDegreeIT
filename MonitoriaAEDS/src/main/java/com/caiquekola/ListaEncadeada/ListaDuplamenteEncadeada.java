@@ -1,12 +1,12 @@
 package com.caiquekola.ListaEncadeada;
 
-import java.util.LinkedList;
 
-public class ListaEncadeada <E>{
+
+public class ListaDuplamenteEncadeada <E>{
     private Item<E> lista;
     private int size;
 
-    public ListaEncadeada() {
+    public ListaDuplamenteEncadeada() {
         lista = null;
     }
 
@@ -73,40 +73,40 @@ public class ListaEncadeada <E>{
         // Checar se um elemento existe na lista
     }
 
-    public boolean isEqual(ListaEncadeada<E> other) {
-        if(size != other.size) {
-            return false;
-        }
+//    public boolean isEqual(ListaEncadead<E> other) {
+//        if(size != other.size) {
+//            return false;
+//        }
+//
+//        Item<E> ponteiro1 = lista;
+//        Item<E> ponteiro2 = other.lista;
+//
+//        while(ponteiro1.proximo != null) {
+//            if(!(ponteiro1.equals(ponteiro2.proximo))) {
+//                return false;
+//            }
+//            ponteiro1 = ponteiro1.proximo;
+//            ponteiro2 = ponteiro2.proximo;
+//        }
+//        return true;
+//    }
 
-        Item<E> ponteiro1 = lista;
-        Item<E> ponteiro2 = other.lista;
-
-        while(ponteiro1.proximo != null) {
-            if(!(ponteiro1.equals(ponteiro2.proximo))) {
-                return false;
-            }
-            ponteiro1 = ponteiro1.proximo;
-            ponteiro2 = ponteiro2.proximo;
-        }
-        return true;
-    }
-
-    public ListaEncadeada<E> mergeList(ListaEncadeada<E> outraLista) {
-        ListaEncadeada<E> novaLista = new ListaEncadeada<>();
-        Item<E> ponteiro = this.lista;
-
-        while(ponteiro.proximo != null) {
-            novaLista.addHead(ponteiro.elemento);
-            ponteiro = ponteiro.proximo;
-        }
-
-        ponteiro = outraLista.lista;
-        while(ponteiro.proximo != null) {
-            novaLista.addHead(ponteiro.elemento);
-            ponteiro = ponteiro.proximo;
-        }
-        return novaLista;
-    }
+//    public ListaEncadeada<E> mergeList(ListaEncadeada<E> outraLista) {
+//        ListaEncadeada<E> novaLista = new ListaEncadeada<>();
+//        Item<E> ponteiro = this.lista;
+//
+//        while(ponteiro.proximo != null) {
+//            novaLista.addHead(ponteiro.elemento);
+//            ponteiro = ponteiro.proximo;
+//        }
+//
+//        ponteiro = outraLista.lista;
+//        while(ponteiro.proximo != null) {
+//            novaLista.addHead(ponteiro.elemento);
+//            ponteiro = ponteiro.proximo;
+//        }
+//        return novaLista;
+//    }
 
     public void printLinkedList() {
         Item<E> ponteiro = lista;
@@ -120,31 +120,16 @@ public class ListaEncadeada <E>{
     public static class Item<T> {
         T elemento;
         Item<T> proximo;
+        Item<T> anterior;
 
-        Item(T item, Item<T> prox) {
+        Item(T item, Item<T> anterior, Item<T> prox) {
             elemento = item;
             proximo = prox;
+            this.anterior = anterior;
         }
     }
 
 }
 
-class ListaEncadeadaManipulada<E>{
-    public boolean isEqual(ListaEncadeada<E> l1, ListaEncadeada<E> l2){
-        if(l1 == null && l2 == null){
-            return true;
-        }else if(l1 == null || l2 == null){
-            return false;
-        }
-        ListaEncadeada.Item<E> ponteiro1 = l1.getLista();
-        ListaEncadeada.Item<E> ponteiro2 = l2.getLista();
-        while(ponteiro1 != null && ponteiro2 != null){
-            if(!(ponteiro1.elemento.equals(ponteiro2.elemento))){
-                return false;
-            }
-        }
-        return true;
-    }
 
-}
 
