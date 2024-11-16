@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+body{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10vh;
+    background-color: burlywood;
+    width: 100%;
+}
+
+
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.gallery img{
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    width: 100%;
+}
+
+.gallery img:hover{
+    transform: scale(1.9);
+} 
+
+/* img {
+    gap: 10px;
+    width: 80%;
+    max-width: 200px;
+    padding: 20px;
+}
+
+
+
+*/

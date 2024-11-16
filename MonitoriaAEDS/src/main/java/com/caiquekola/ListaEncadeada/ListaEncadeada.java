@@ -45,7 +45,7 @@ public class ListaEncadeada <E>{
             return false;
         }
         if(lista.elemento.equals(item)) {
-            lista = null;
+            lista = lista.proximo;
             size--;
             return true;
         }
@@ -56,6 +56,7 @@ public class ListaEncadeada <E>{
                 size--;
                 return true;
             }
+            ponteiro = ponteiro.proximo;
         }
         return false;
     }
