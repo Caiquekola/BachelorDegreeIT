@@ -1,4 +1,4 @@
-package com.caiquekola.ListaEncadeada;
+package com.caiquekola.ListaEncadeadaRespostas;
 
 public class Pilha {
     // Pilha com inteiros
@@ -6,12 +6,15 @@ public class Pilha {
     private int topo = 0;
 
     private int itens[];
+
     public Pilha(){
         itens = new int[tamanhoPilha];
     }
 
     public void push(int valor){
         if(!isFull()){
+            // 5 2 3
+            // 0 1 2
             itens[topo] = valor;
             topo++;
         }else{
@@ -22,6 +25,8 @@ public class Pilha {
 
     public void pop(){
         if(!isEmpty()){
+            // 5 2 3
+            // 0 1 2
             topo--;
         }else{
             System.out.println("Pilha vazia");
@@ -61,48 +66,49 @@ class ManipulacaoPilha{
 
     //Exercício 2:
     public int transferirElementos(Pilha p1, Pilha p2){
-
-//        System.arraycopy(p1.getItens(), 0, p2.getItens(), p2.getTopo(), p1.getItens().length);
-//        if(p2.getTamanhoPilha()-p2.getTopo()<p1.getTamanhoPilha()){
-//            //Nesse caso o tamanho restante da pilha 2 não suportará a quantidade de itens
-//            return 0;
-//        }
-//        return 1;
-
-
-        Pilha ponteiro = p1;
-        int topoPilha1 = p1.getTopo();
-        int contador = 0;
-
-        while(!p2.isFull()){
-            p2.push(ponteiro.getItens()[contador]);
-            contador++;
-        }
-        if(p2.isFull()&&(contador!=topoPilha1)){
+        System.arraycopy(p1.getItens(), 0, p2.getItens(), p2.getTopo(), p1.getItens().length);
+        if(p2.getTamanhoPilha()-p2.getTopo()<p1.getTamanhoPilha()){
+            //Nesse caso o tamanho restante da pilha 2 não suportará a quantidade de itens
             return 0;
         }
         return 1;
 
 
+//        Pilha ponteiro = p1;
+//        int topoPilha1 = p1.getTopo();
+//        int contador = 0;
+//
+//        while(!p2.isFull()){
+//            p2.push(ponteiro.getItens()[contador]);
+//            contador++;
+//        }
+//        if(p2.isFull()&&(contador!=topoPilha1)){
+//            return 0;
+//        }
+//        return 1;
+
+
     }
 
-    public void inverter(Pilha p1){
 
-        Pilha invertida = new Pilha();
 
-        while (!p1.isEmpty()) {
-            int valor = p1.getItens()[p1.getTopo() - 1]; // Pegar o elemento do topo
-            invertida.push(valor); // Empilhar na pilha invertida
-            p1.pop(); // Remover da pilha original
+        public void inverter(Pilha P) {
+            // Criar uma pilha auxiliar
+            Pilha auxiliar = new Pilha();
+
+            // Transferir todos os elementos de P para a pilha auxiliar
+            while (!P.isEmpty()) {
+                auxiliar.push(P.getItens()[P.getTopo() - 1]); // Adicionar o elemento do topo à auxiliar
+                P.pop(); // Remover da pilha original
+            }
+
+            // Transferir os elementos de volta para a pilha original (P)
+            while (!auxiliar.isEmpty()) {
+                P.push(auxiliar.getItens()[auxiliar.getTopo() - 1]); // Adicionar o elemento do topo de volta a P
+                auxiliar.pop(); // Remover da pilha auxiliar
+            }
         }
 
-        // Transferir os elementos de volta para p1
-        while (!invertida.isEmpty()) {
-            int valor = invertida.getItens()[invertida.getTopo() - 1]; // Pegar o elemento do topo
-            p1.push(valor); // Empilhar de volta na pilha original
-            invertida.pop(); // Remover da pilha invertida
-        }
-    }
 
 
     public static void main(String[] args) {
@@ -129,6 +135,7 @@ class ManipulacaoPilha{
         for (int i = 0; i < p.getTopo(); i++) {
             System.out.print(p.getItens()[i] + " ");
         }
+
         System.out.println();
     }
 }
