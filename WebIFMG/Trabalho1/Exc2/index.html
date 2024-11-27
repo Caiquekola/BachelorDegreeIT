@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 2</title>
+    <!-- github.com/caiquekola -->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: linear-gradient(45deg, #372e30, #632210);
+        }
+
+        .containerInput {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background-color: darkslategray;
+            margin: 10px 10px;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .containerInput input {
+            background: transparent;
+            border: 0;
+            color: white;
+            text-overflow: ellipsis;
+            outline: 0;
+        }
+
+        .containerInput button {
+            background: transparent;
+            color: white;
+            border: 0;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .containerInput svg {
+            width: 20px;
+
+        }
+
+        .containerOutput 
+
+
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="container">
+            <div class="containerInput">
+                <input type="text" name="" id="input" placeholder="Digite seu nome...">
+                <button id="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        <path fill-rule="evenodd"
+                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+                    </svg>
+                </button>
+            </div>
+            <div class="containerOutput" id="containerOutput">
+                <ul id="nameList"></ul>
+            </div>
+        </div>
+    </main>
+    <script>
+        const input = document.getElementById("input");
+        const button = document.getElementById("button");
+        const nameList = document.getElementById("nameList");
+        input.focus();
+        
+        button.addEventListener('click', handleAddName);
+        input.addEventListener('keydown',(event) =>{
+            if(event.key==="Enter"){
+                event.preventDefault();
+                handleAddName();
+            }
+        });
+        function handleAddName(){
+            const name = input.value.trim();
+            if (name!=="") {
+                addNameToList(name);
+                input.value = "";
+                input.focus();
+            }else{
+                alert("Por favor, insira um nome.");
+            }
+        }
+        
+        function addNameToList(name) {
+            const listItem = document.createElement("li");
+            listItem.textContent = name;
+            nameList.appendChild(listItem);
+            
+        }
+
+    </script>
+</body>
+
+</html>
