@@ -1,28 +1,22 @@
-package com.caiquekola.ListaEncadeada;
+package com.caiquekola.ListaEncadeadaRespostas;
 
 
 
-public class ListaDuplamenteEncadeada <E>{
+public class ListaDuplamenteEncadeada<E> {
+
     private Item<E> lista;
     private int size;
 
     public ListaDuplamenteEncadeada() {
         lista = null;
-    }
-
-    public Item<E> getLista() {
-        return lista;
-    }
-
-    public int getSize() {
-        return size;
+        size = 0;
     }
 
     public void addHead(E item) {
         if (lista == null) {
-            lista = new Item<E>(item, null,null);
+            lista = new Item<>(item, null, null);
         } else {
-            Item<E> novoItem = new Item<E>(item, null,lista);
+            Item<E> novoItem = new Item<>(item, null, lista);
             lista.anterior = novoItem;
             lista = novoItem;
         }
@@ -31,30 +25,32 @@ public class ListaDuplamenteEncadeada <E>{
 
     public void addTail(E item) {
         if (lista == null) {
-            lista = new Item<E>(item, null,null);
+            lista = new Item<>(item, null, null);
         } else {
             Item<E> ponteiro = lista;
-            for (; ponteiro.proximo != null; ponteiro = ponteiro.proximo) {
+            while (ponteiro.proximo != null) {
+                ponteiro = ponteiro.proximo;
             }
-            ponteiro.proximo = new Item<E>(item, ponteiro,null);
+            ponteiro.proximo = new Item<>(item, ponteiro, null);
         }
         size++;
     }
 
     public boolean removeElement(E item) {
-        if (lista == null) {
-            return false;
-        }
-        if(lista.elemento.equals(item)) {
+        if (lista == null || item == null) return false;
+
+        if (lista.elemento.equals(item)) {
             lista = lista.proximo;
+            if (lista != null) lista.anterior = null;
             size--;
             return true;
         }
+
         Item<E> ponteiro = lista;
-        while(ponteiro.proximo != null) {
-            if(ponteiro.proximo.elemento.equals(item)) {
+        while (ponteiro.proximo != null) {
+            if (ponteiro.proximo.elemento.equals(item)) {
                 ponteiro.proximo = ponteiro.proximo.proximo;
-                ponteiro.proximo.anterior = ponteiro;
+                if (ponteiro.proximo != null) ponteiro.proximo.anterior = ponteiro;
                 size--;
                 return true;
             }
@@ -64,76 +60,64 @@ public class ListaDuplamenteEncadeada <E>{
     }
 
     public boolean isEqual(ListaDuplamenteEncadeada<E> lista2) {
-        if(size != lista2.getSize()) {
-            return false;
-        }
-        Item<E> ponteiroLista1 = this.lista;
-        Item<E> ponteiroLista2 = lista2.lista;
+        if (size != lista2.size) return false;
 
-        while(ponteiroLista1.proximo != null) {
-            if(!(ponteiroLista1.elemento.equals(ponteiroLista2))) {
-                return false;
-            }
-            ponteiroLista2 = ponteiroLista2.proximo;
-            ponteiroLista1 = ponteiroLista1.proximo;
+        Item<E> ponteiro1 = this.lista;
+        Item<E> ponteiro2 = lista2.lista;
+
+        while (ponteiro1 != null && ponteiro2 != null) {
+            if (!ponteiro1.elemento.equals(ponteiro2.elemento)) return false;
+            ponteiro1 = ponteiro1.proximo;
+            ponteiro2 = ponteiro2.proximo;
         }
-        return true;
+        return ponteiro1 == null && ponteiro2 == null;
     }
 
     public ListaDuplamenteEncadeada<E> merge(ListaDuplamenteEncadeada<E> lista2) {
-        ListaDuplamenteEncadeada<E> novaLista = new ListaDuplamenteEncadeada<>();
-        Item<E> ponteiro = this.lista;
+        if (lista2 == null || lista2.lista == null) return this;
 
-        for(; ponteiro != null; ponteiro = ponteiro.proximo) {
-            novaLista.addTail(ponteiro.elemento);
+        Item<E> tail = getTail();
+        if (tail != null) {
+            tail.proximo = lista2.lista;
+            lista2.lista.anterior = tail;
+        } else {
+            lista = lista2.lista;
         }
 
-        ponteiro = lista2.lista;
-
-        for(; ponteiro != null; ponteiro = ponteiro.proximo) {
-            novaLista.addTail(ponteiro.elemento);
-        }
-
-        return novaLista;
+        size += lista2.size;
+        return this;
     }
 
-    public boolean elementExist(E item) {
-        if (lista == null)
-            return false;
+    public Item<E> getTail() {
+        if (lista == null) return null;
         Item<E> ponteiro = lista;
-        for (; ponteiro != null; ponteiro = ponteiro.proximo) {
-            if (item.equals(ponteiro.elemento)) {
-                return true;
-            }
-        }
-        return false;
-        // Checar se um elemento existe na lista
+        while (ponteiro.proximo != null) ponteiro = ponteiro.proximo;
+        return ponteiro;
     }
 
-
-
-    public void printLinkedList() {
-        Item<E> ponteiro = lista;
-        System.out.println("Imprimindo a Lista encadeada");
-        for (; ponteiro != null; ponteiro = ponteiro.proximo) {
-            System.out.println(ponteiro.elemento);
-        }
+    public void clear() {
+        lista = null;
+        size = 0;
     }
-
 
     public static class Item<T> {
         T elemento;
         Item<T> proximo;
         Item<T> anterior;
 
-        Item(T item, Item<T> anterior, Item<T> prox) {
-            elemento = item;
-            proximo = prox;
+        Item(T elemento, Item<T> anterior, Item<T> proximo) {
+            this.elemento = elemento;
             this.anterior = anterior;
+            this.proximo = proximo;
+        }
+
+        @Override
+        public String toString() {
+            return elemento.toString();
         }
     }
-
 }
+
 
 
 
