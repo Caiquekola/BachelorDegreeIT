@@ -1,18 +1,12 @@
 package com.caiquekola;
 
-<<<<<<< HEAD
 
 import com.caiquekola.ListaEncadeadaRespostas.LinkedList;
 import com.caiquekola.ListaEncadeadaRespostas.LinkedListManipulation;
-=======
-import com.caiquekola.ListaEncadeada.ListaDuplamenteEncadeada;
-import com.caiquekola.ListaEncadeada.ListaEncadeada;
->>>>>>> 5e126dd0cf1cee3b54f68dd11ba3caff0bae4d40
 
-public class Main {
+public class MainMain {
 
     public static void main(String[] args) {
-<<<<<<< HEAD
                 System.out.println("Criando Lista");
                 LinkedList<Integer> minhaLista = new LinkedList<Integer>();
                 System.out.println("Inserindo Elemento");
@@ -88,35 +82,6 @@ public class Main {
                 System.out.println("As duas listas criadas são iguais?");
                 System.out.println(LinkedListManipulation.isEqual(newList, newList2));
             }
-        }
-
-
-=======
-
-        //Iniciação da lista encadeada
-        ListaEncadeada<Integer> listaEncadeada = new ListaEncadeada<>();
-        //Adição de nós
-        listaEncadeada.addHead(5);
-        listaEncadeada.addHead(6);
-        listaEncadeada.addHead(7);
-        //Impressão
-        listaEncadeada.printLinkedList();
-        //Remoção
-        listaEncadeada.removeElement(6);
-        listaEncadeada.printLinkedList();
-
-        System.out.println("------=-------=-------");
-
-        //Criação da lista duplamente encadeada
-        ListaDuplamenteEncadeada<Integer> listaDuplaEncadeada = new ListaDuplamenteEncadeada<>();
-        listaDuplaEncadeada.addHead(5);
-        listaDuplaEncadeada.addHead(6);
-        listaDuplaEncadeada.addTail(7);
-        //Impressão após adição de elementos
-        listaDuplaEncadeada.printLinkedList();
-
-        listaDuplaEncadeada.removeElement(7);
-        listaDuplaEncadeada.printLinkedList();
-    }
 }
->>>>>>> 5e126dd0cf1cee3b54f68dd11ba3caff0bae4d40
+
+
