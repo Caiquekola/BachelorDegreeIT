@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Text</title>
+    <!-- github.com/caiquekola -->
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(60deg, rgb(58, 78, 71), rgba(2, 2, 2, 1));
+        }
+
+
+
+        .containerButton {
+            margin-top: 1rem;
+            width: 2rem;
+        }
+
+        .containerButton button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, rgb(27, 24, 24), rgba(17, 44, 96, 0.564));
+            color: rgb(131, 208, 204);
+            border: 0;
+            border-radius: 9px;
+            padding: 10px 30px;
+            cursor: pointer;
+            box-shadow: black 2px 5px 9px;
+        }
+
+
+        .containerButton button:hover {
+            transform: scale(1.1);
+        }
+
+        .light {
+            background: linear-gradient(45deg, rgb(255, 255, 255), rgba(17, 44, 96, 0.564));
+
+        }
+
+
+        .toggle {
+            margin-bottom: 40px;
+        }
+
+        .toggle>input {
+            display: none;
+        }
+
+        .toggle>label {
+            position: relative;
+            display: block;
+            height: 20px;
+            width: 44px;
+            background: #898989;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle>label:after {
+            position: absolute;
+            left: -2px;
+            top: -3px;
+            display: block;
+            width: 26px;
+            height: 26px;
+            border-radius: 100px;
+            background: #fff;
+            box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.05);
+            content: '';
+            transition: all 0.3s ease;
+        }
+
+        .toggle>label:active:after {
+            transform: scale(1.15, 0.85);
+        }
+
+        .toggle>input:checked~label {
+            background: #6fbeb5;
+        }
+
+        .toggle>input:checked~label:after {
+            left: 20px;
+            background: #179588;
+        }
+
+        .toggle>input:disabled~label {
+            background: #d5d5d5;
+            pointer-events: none;
+        }
+
+        .toggle>input:disabled~label:after {
+            background: #bcbdbc;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+
+        <div class="containerButton">
+
+            <div class="toggle">
+                <input type="checkbox" id="foo">
+                <label for="foo"></label>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const toggle = document.getElementById('foo');
+        const lampada =  document.getElementsByTagName("main")[0];
+
+        toggle.addEventListener('change', () => {
+            lampada.classList.toggle("light");
+
+        });
+    </script>
+</body>
+
+</html>

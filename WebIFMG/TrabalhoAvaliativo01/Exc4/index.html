@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Text</title>
+    <!-- github.com/caiquekola -->
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(60deg, rgb(58, 78, 71), rgba(2, 2, 2, 1));
+        }
+
+        .containerText {
+            display: flex;
+            justify-content: center;
+            overflow-y: auto;
+            max-width: 60vh;
+        }
+
+        .containerText p {
+            color: white;
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        .containerButton {
+            margin-top: 1rem;
+            width: 2rem;
+        }
+
+        .containerButton button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, rgb(27, 24, 24), rgba(17, 44, 96, 0.564));
+            color: rgb(131, 208, 204);
+            border: 0;
+            border-radius: 9px;
+            padding: 10px 30px;
+            cursor: pointer;
+            box-shadow: black 2px 5px 9px;
+        }
+
+
+
+        .containerButton button:hover {
+            transform: scale(1.1);
+        }
+
+        .hidden {
+            display: none;
+            visibility: hidden;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="containerText" id="text">
+            <p >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique ratione expedita sed itaque molestiae
+                nulla! Culpa exercitationem esse aperiam vitae dolorem nostrum facere, autem in dolore dignissimos
+                perspiciatis? Mollitia, commodi!
+                Voluptas repellat molestias culpa sed voluptatum recusandae fugiat at aut ullam pariatur obcaecati
+                voluptatem dicta perferendis quo, labore tempore libero, expedita consectetur, vero rerum praesentium!
+                Fugiat voluptas nesciunt explicabo quo?
+                Molestiae iste eius, porro dicta voluptas rem expedita consequatur perferendis laudantium doloribus
+                harum
+                similique non assumenda neque itaque culpa quis quibusdam. Dolorum provident praesentium hic mollitia
+                dicta
+                minima? Voluptatibus, aut!
+            </p>
+        </div>
+        
+    </main>
+
+    <script>
+        const text = document.getElementById("text");
+
+        text.addEventListener('mouseover',()=>{
+            text.classList.toggle("hidden");
+        });
+
+        text.addEventListener('mouseleave',()=>{
+            text.classList.toggle("hidden");
+        });
+
+        
+    </script>
+</body>
+
+</html>

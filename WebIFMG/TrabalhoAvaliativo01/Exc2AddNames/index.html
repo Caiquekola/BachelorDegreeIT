@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 2</title>
+    <!-- github.com/caiquekola -->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family:sans-serif;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: linear-gradient(45deg, #372e30, #632210);
+        }
+
+
+        .containerInput {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background:  linear-gradient(45deg, rgb(13, 7, 30),rgb(4, 44, 13));
+            margin: 10px 10px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .containerInput input {
+            flex: 1;
+            background: transparent;
+            border: 0;
+            color: white;
+            text-overflow: ellipsis;
+            outline: 0;
+            font-size: 20px;
+        }
+
+        .containerInput input::placeholder{
+            color: white;
+        }
+
+        .containerInput button {
+            background: transparent;
+            color: white;
+            border: 0;
+            cursor: pointer;
+            margin: 0;
+            padding: 0 ;
+
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .containerInput svg{
+            width: 40px;
+            height: 40px;
+            
+        }
+
+        .containerInput button:hover{
+            transform: scale(1.2);
+        }
+
+        .containerOutput{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-height: 150px;
+            overflow-y: auto;
+            /* margin-top: 10px;
+            border: 1px solid white;
+            padding: 10px;
+            border-radius: 8px; */
+        }
+
+        .containerOutput ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .containerOutput ul li{
+            color: white;
+            background: linear-gradient(45deg, rgb(22, 9, 66),rgb(134, 12, 73));
+            margin: 5px 0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="container">
+            <div class="containerInput">
+                <input type="text" name="" id="input" placeholder="Digite seu nome...">
+                <button id="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                        <path fill-rule="evenodd"
+                            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+                    </svg>
+                </button>
+
+            </div>
+            <div class="containerOutput">
+                    <ul id="list"></ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const input = document.getElementById("input");
+        input.focus();
+        input.addEventListener('keydown',(event) =>{
+            if(event.key==="Enter"){
+                handleAddName(input);
+            }
+        });
+
+        const list = document.getElementById("list");
+        const button = document.getElementById("button");
+        button.addEventListener('click',() => handleAddName(input));
+
+        function handleAddName(textInput){
+            const name = textInput.value.trim();
+            if(name!==""){
+                addName(name);
+                textInput.value = "";
+                textInput.focus();
+            }else{
+                alert("Por favor insira um nome válido...");
+            }
+        }
+
+        function addName(input) {
+                const item = document.createElement("li");
+                item.textContent = input;
+                list.appendChild(item);
+        }
+
+
+    </script>
+</body>
+
+</html>

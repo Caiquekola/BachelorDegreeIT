@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Cliques</title>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(60deg, rgb(58, 78, 71), rgba(2, 2, 2, 1));
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, rgb(27, 24, 24), rgba(17, 44, 96, 0.564));
+            color: rgb(181, 198, 197);
+            border: 0;
+            border-radius: 9px;
+            padding: 10px 30px;
+            cursor: pointer;
+            box-shadow: black 2px 5px 9px;
+        }
+
+        .containerButton button:hover {
+            transform: scale(1.1);
+        }
+
+        main p {
+            font-size: 50px;
+            color: white;
+        }
+
+        .hidden {
+            visibility: hidden;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <p id="contador" class="hidden">
+            0
+        </p>
+        <button  id="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+            </svg>
+        </button>
+    </main>
+
+    <script>
+        const button = document.getElementById("button");
+        const contador = document.getElementById("contador");
+
+        let quantity = 0;
+        document.addEventListener('keypress', (event) => {
+            if (event.key == " ") {
+                increment();
+            }
+        })
+        button.addEventListener('click', () => {
+            increment();
+        })
+
+        function increment() {
+            quantity++;
+            contador.textContent = quantity;
+            contador.classList.toggle("hidden",quantity<=0)
+            
+        }
+    </script>
+</body>
+
+</html>
