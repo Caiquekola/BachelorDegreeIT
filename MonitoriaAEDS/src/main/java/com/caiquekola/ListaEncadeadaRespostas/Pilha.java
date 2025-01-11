@@ -33,6 +33,12 @@ public class Pilha {
         }
     }
 
+    public void print(){
+        for(int i = 0; i < topo; i++){
+            System.out.println(itens[i]);
+        }
+    }
+
     public boolean isEmpty(){
         return topo == 0;
     }
@@ -73,21 +79,6 @@ class ManipulacaoPilha{
         }
         return 1;
 
-
-//        Pilha ponteiro = p1;
-//        int topoPilha1 = p1.getTopo();
-//        int contador = 0;
-//
-//        while(!p2.isFull()){
-//            p2.push(ponteiro.getItens()[contador]);
-//            contador++;
-//        }
-//        if(p2.isFull()&&(contador!=topoPilha1)){
-//            return 0;
-//        }
-//        return 1;
-
-
     }
 
 
@@ -95,6 +86,7 @@ class ManipulacaoPilha{
         public void inverter(Pilha P) {
             // Criar uma pilha auxiliar
             Pilha auxiliar = new Pilha();
+            Pilha auxiliar2 = new Pilha();
 
             // Transferir todos os elementos de P para a pilha auxiliar
             while (!P.isEmpty()) {
@@ -102,10 +94,15 @@ class ManipulacaoPilha{
                 P.pop(); // Remover da pilha original
             }
 
+            while(!auxiliar.isEmpty()){
+                auxiliar2.push(auxiliar.getItens()[auxiliar.getTopo() - 1]); // Adicionar o elemento do topo à auxiliar
+                auxiliar.pop(); // Remover da pilha original
+            }
+
             // Transferir os elementos de volta para a pilha original (P)
-            while (!auxiliar.isEmpty()) {
-                P.push(auxiliar.getItens()[auxiliar.getTopo() - 1]); // Adicionar o elemento do topo de volta a P
-                auxiliar.pop(); // Remover da pilha auxiliar
+            while (!auxiliar2.isEmpty()) {
+                P.push(auxiliar2.getItens()[auxiliar2.getTopo() - 1]); // Adicionar o elemento do topo de volta a P
+                auxiliar2.pop(); // Remover da pilha auxiliar
             }
         }
 
@@ -126,10 +123,12 @@ class ManipulacaoPilha{
         for (int i = 0; i < p.getTopo(); i++) {
             System.out.print(p.getItens()[i] + " ");
         }
+
         System.out.println();
 
         // Invertendo a pilha
         manipulador.inverter(p);
+
 
         System.out.println("Pilha invertida:");
         for (int i = 0; i < p.getTopo(); i++) {

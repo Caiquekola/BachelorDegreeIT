@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 1</title>
+    <!-- www.github.com/caiquekola -->
+     <style>
+
+        body{
+            padding: 0;
+            margin: 0;
+        }      
+        main{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(17, 16, 34, 0.8), rgba(20, 4, 40, 0.9)) ;
+            flex-direction: column;
+        }
+        button{
+            border: 0;
+            cursor: pointer;
+            background-color: transparent;
+            background:rgba(17, 16, 34, 0.3);
+            border: 1px;
+            padding: 8px 20px;
+            border-radius: 9px;
+        }
+        button:hover{
+            transform: scale(1.02);
+        }
+        span{
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        p{
+            position: absolute;
+            top: 90%;
+            color: white;
+        }
+     </style>
+</head>
+<body>
+    <main id="main">
+        <button id="button">
+            <span>Altere a cor de fundo</span>
+        </button>
+        <p>
+            by caiquekola
+        </p>
+    </main>        
+    <script>
+        const button = document.getElementById('button');
+        const main = document.getElementById('main');
+    
+        const gradients = [
+            "linear-gradient(45deg, #ff9a9e, #fad0c4)",
+            "linear-gradient(120deg, #a1c4fd, #c2e9fb)",
+            "linear-gradient(60deg, #fbc2eb, #a6c1ee)",
+            "linear-gradient(90deg, #84fab0, #8fd3f4)",
+            "linear-gradient(120deg, #ffecd2, #fcb69f)"
+        ];
+
+        let currentGradient = 0;
+
+        button.addEventListener('click',()=>{
+            currentGradient = (currentGradient + 1) % gradients.length;
+            main.style.background = gradients[currentGradient];
+        });
+
+    </script>
+</body>
+</html>

@@ -4,7 +4,7 @@ package com.caiquekola;
 import com.caiquekola.ListaEncadeadaRespostas.LinkedList;
 import com.caiquekola.ListaEncadeadaRespostas.LinkedListManipulation;
 
-public class Main {
+public class MainMain {
 
     public static void main(String[] args) {
                 System.out.println("Criando Lista");
@@ -82,7 +82,11 @@ public class Main {
                 System.out.println("As duas listas criadas são iguais?");
                 System.out.println(LinkedListManipulation.isEqual(newList, newList2));
             }
+<<<<<<< HEAD:MonitoriaAEDS/src/main/java/com/caiquekola/Main.java
         }
 
+=======
+}
+>>>>>>> d72c743134316ba4e42bffc38a287512c77ed6a6:MonitoriaAEDS/src/main/java/com/caiquekola/MainMain.java
 
 
