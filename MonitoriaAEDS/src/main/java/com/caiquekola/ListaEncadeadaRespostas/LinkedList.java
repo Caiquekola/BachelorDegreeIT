@@ -66,7 +66,6 @@ public class LinkedList<E> {
             ponteiro = ponteiro.proximo;
         }
         return false;
-        // Implementar a remocao de um elemento na lista
     }
 
     public boolean elementExist(E item) {
