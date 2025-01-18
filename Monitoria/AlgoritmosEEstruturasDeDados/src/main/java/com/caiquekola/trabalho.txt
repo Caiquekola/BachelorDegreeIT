@@ -1,0 +1,36 @@
+Vocês irão implementar os algoritmos 
+de ordenação vistos em sala de aula, 
+executar múltiplos cenários que serão apresentados 
+a seguir, gerar gráficos e escrever um 
+relatório técnico conforme a definição do estudo abaixo.      
+
+
+VALOR: 30 pontos 
+
+
+1. Implemente em Java os algoritmos: 
+Seleção, Inserção, Bolha, Mergesort e Quicksort 
+2. Para cada cenário, responda a seguinte pergunta:
+
+Descreva o desempenho dos algoritmos e os compare.      
+3. Cenários:
+Tamanho dos vetores: Gere vetores de tamanho 
+100, 500, 1.000, 5.000, 20.000, 50.000, 100.000, 500.000
+Vetor ordenado crescente. Gere vetores ordenados 
+crescente seguindo cada tamanho mencionado acima.
+Vetor ordenado decrescente. Gere vetores ordenados 
+decrescente seguindo cada tamanho mencionado acima.
+Vetor aleatório. Use o Math.random em Java para 
+gerar os número aleatórios. Fixe uma seed para 
+ser possível replicar o experimento. 
+4. Responda as seguintes perguntas:
+Quais algoritmos são estáveis e por que?
+Qual é a complexidade de tempo de cada algoritmo?
+Avaliando os gráficos obtidos para cada cenário 
+responda: Qual é o melhor caso de cada algoritmo?
+Qual é o pior caso de cada algoritmo dado os 
+resultados obtidos na execução dos cenários?
+Qual é o melhor algoritmo independente do 
+tamanho e cenário ?
+Qual algoritmo você usaria no mundo real e por que?
+
