@@ -7,8 +7,10 @@ class GerenciadorTarefasController {
             const index = evento.target.dataset.index;
             if (evento.target.type === 'checkbox' ) {
                 this.model.marcaComoConcluida(index);
-                this.updateView();
+            } else if (evento.target.closest('button')) {
+                this.model.excluir(index);
             }
+            this.updateView();
         });
 
         this.view.novaTarefa.addEventListener('click', () => {
