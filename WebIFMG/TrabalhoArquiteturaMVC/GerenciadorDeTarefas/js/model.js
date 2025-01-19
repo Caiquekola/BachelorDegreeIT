@@ -1,15 +1,21 @@
 class GerenciadorTarefas {
     constructor() {
-        this.tarefas = [{ descricao: 'Estudar JS', status: 'pendente' }];
+        this.tarefas = [];
     }
 
     adicionar(tarefa) {
-        this.tarefas.push(tarefa);
+        if(tarefa.descricao != ''){
+            this.tarefas.unshift(tarefa);
+        }
     }
 
     marcaComoConcluida(index) {
         const tarefa = this.tarefas[index];
         tarefa.status = tarefa.status === 'pendente' ? 'concluida' : 'pendente';
+        if(tarefa.status === 'concluida'){
+            this.excluir(index);
+            this.tarefas.push(tarefa);
+        }
     }
 
     excluir(index) {
