@@ -18,7 +18,14 @@ class GerenciadorTarefasView {
             checkboxConcluir.dataset.index = index;
             checkboxConcluir.checked = tarefa.status === 'concluida';
 
+            const btn_excluir = document.createElement('button');
+            const icon = document.createElement('i');
+            icon.classList.add('fas', 'fa-trash-alt');
+            btn_excluir.appendChild(icon);
+            btn_excluir.dataset.index = index;
+
             li.appendChild(checkboxConcluir);
+            li.appendChild(btn_excluir);
             this.listaTarefas.appendChild(li);
         });
     }
