@@ -1,6 +1,6 @@
 package com.caiquekola.TrabalhoFinalAEDS;
 
-public class Exc1MergeSort {
+public class MergeSort {
     public static void main(String[] args) {
         int arr[] = { 12, 11, 13, 5, 6, 7 };
 
@@ -24,6 +24,12 @@ public class Exc1MergeSort {
             //Merge (junção) das duas metades
             merge(array,esquerda,meio,direita);
         }
+    }
+    public static long mergeSort(int[] vetor){
+        long inicioTempo = System.nanoTime();
+        sort(vetor, 0, vetor.length - 1);
+        long fimTempo = System.nanoTime();
+        return (fimTempo-inicioTempo);
     }
     //Juncao "merge"
     //Primeira metade do array até o meio e meio até o fim

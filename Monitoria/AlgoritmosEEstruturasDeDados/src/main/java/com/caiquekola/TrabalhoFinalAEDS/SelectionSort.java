@@ -2,7 +2,7 @@ package com.caiquekola.TrabalhoFinalAEDS;
 
 import java.util.Scanner;
 
-public class Exc1InsertionSort {
+public class SelectionSort {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.print("Insira o tamanho do vetor: ");
@@ -15,29 +15,27 @@ public class Exc1InsertionSort {
         }
         scan.close();
         // Exercicio 2 e 3
-        insertionSort(vetor);
+        selectionSort(vetor);
         System.out.print("Vetor ordenado: ");
         for (int i = 0; i < tamanhoVetor; i++){
             System.out.print(vetor[i]+" ");
         }
-        
-    }
-    
-    public static void insertionSort(int[] vetor){
-        //Exercicio 4
-        int numeroComparacoes = 0;
-        for (int i = 1; i < vetor.length; i++) {
-            int j = i-1;
-            int auxiliar = vetor[i];
-            numeroComparacoes++;
-            while (j >= 0 && vetor[j]>auxiliar) {
-                vetor[j+1] = vetor[j];
-                j--;
-                numeroComparacoes++;
-            }
-            vetor[j+1] = auxiliar;
-        }
-        System.out.println("Numero de comparacoes: "+numeroComparacoes);
 
+    }
+    public static long selectionSort(int[] vetor){
+        long inicioTempo = System.nanoTime();
+        for (int i = 0; i < vetor.length; i++){
+            int menor = i;
+            for (int j = i+1; j < vetor.length; j++){
+                if(vetor[j] < vetor[menor]){
+                    menor = j;
+                }
+            }
+            int aux = vetor[menor];
+            vetor[menor] = vetor[i];
+            vetor[i] = aux;
+        }
+        long fimTempo = System.nanoTime();
+        return (fimTempo - inicioTempo);
     }
 }
